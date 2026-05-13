@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://namilbeltsystem.github.io/home/sitemap.xml
