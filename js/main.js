@@ -45,16 +45,6 @@
 
     backdrop.addEventListener('click', closeMobileNav);
 
-    // Close menu when clicking a nav link (let browser handle navigation)
-    DOM.nav.querySelectorAll('.nav__link').forEach(link => {
-      link.addEventListener('click', () => {
-        DOM.nav.classList.remove('is-open');
-        DOM.hamburger.classList.remove('is-open');
-        backdrop.style.display = 'none';
-        document.body.style.overflow = '';
-      });
-    });
-
     function closeMobileNav() {
       DOM.nav.classList.remove('is-open');
       DOM.hamburger.classList.remove('is-open');
