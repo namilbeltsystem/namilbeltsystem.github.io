@@ -1,0 +1,18 @@
+{
+  "tistory": {
+    "blog_url": "https://namilsystem.tistory.com",
+    "access_token": "YOUR_TISTORY_ACCESS_TOKEN",
+    "visibility": "3"
+  },
+  "schedule": {
+    "day": "monday",
+    "time": "09:00"
+  },
+  "company": {
+    "name": "남일벨트시스템",
+    "phone": "02-6084-7795",
+    "email": "namilsystem@naver.com",
+    "website": "https://namilbeltsystem.github.io",
+    "blog_naver": "https://blog.naver.com/namilsystem"
+  }
+}

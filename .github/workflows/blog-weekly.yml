@@ -1,0 +1,48 @@
+name: Weekly Blog Post Generator
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # 매주 월요일 09:00 KST
+  workflow_dispatch:       # 수동 실행 버튼
+  push:
+    paths:
+      - 'blog/posts/*.json'  # 새 포스트가 생성되면 자동 포스팅
+
+jobs:
+  post-to-tistory:
+    runs-on: ubuntu-latest
+    environment: blog
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate weekly posts
+        run: python3 blog/generate_post.py generate
+
+      - name: Post to Tistory
+        env:
+          TISTORY_TOKEN: ${{ secrets.TISTORY_TOKEN }}
+        run: |
+          # Inject token from GitHub Secrets
+          python3 -c "
+          import json
+          with open('blog/config.json') as f: c = json.load(f)
+          c['tistory']['access_token'] = '${{ secrets.TISTORY_TOKEN }}'
+          with open('blog/config.json','w') as f: json.dump(c, f, ensure_ascii=False, indent=2)
+          "
+          python3 blog/post_to_tistory.py post
+
+      - name: Commit generated posts
+        run: |
+          git config user.name "Blog Bot"
+          git config user.email "blog-bot@namilbeltsystem.github.io"
+          git add blog/posts/ blog/archive/
+          git diff --cached --quiet || git commit -m "Auto: weekly blog posts $(date +%Y-%m-%d)"
+          git push
