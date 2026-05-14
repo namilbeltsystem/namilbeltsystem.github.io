@@ -658,7 +658,7 @@ ul { list-style: none; }
 /* ===== Floating Buttons ===== */
 .floating {
   position: fixed;
-  right: 20px;
+  left: 20px;
   bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -687,6 +687,9 @@ ul { list-style: none; }
   transform: translateY(-2px);
 }
 .floating__btn--top {
+  background: var(--color-bg-dark);
+}
+#settingsBtn.floating__btn {
   background: var(--color-bg-dark);
 }
 
@@ -906,40 +909,18 @@ ul { list-style: none; }
 }
 
 /* ===== Settings Panel ===== */
-.settings-btn {
-  position: fixed;
-  left: 20px;
-  bottom: 20px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--color-bg-dark);
-  color: var(--color-white);
-  border: none;
-  cursor: pointer;
-  font-size: 1.3rem;
-  z-index: 950;
-  box-shadow: var(--shadow-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition);
-}
-.settings-btn:hover {
-  background: var(--color-primary);
-}
 .settings-panel {
   position: fixed;
   left: 20px;
-  bottom: 80px;
+  bottom: 180px;
   width: 300px;
-  max-height: 70vh;
+  max-height: 60vh;
   overflow-y: auto;
   background: var(--color-white);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   padding: 24px;
-  z-index: 949;
+  z-index: 899;
   display: none;
 }
 .settings-panel.is-open { display: block; }
@@ -996,6 +977,5 @@ ul { list-style: none; }
 }
 
 @media (max-width: 640px) {
-  .settings-btn { width: 44px; height: 44px; left: 12px; bottom: 12px; }
-  .settings-panel { left: 12px; bottom: 64px; width: 260px; }
+  .settings-panel { left: 12px; bottom: 160px; width: 260px; }
 }
