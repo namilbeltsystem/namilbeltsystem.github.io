@@ -45,9 +45,20 @@
 
     backdrop.addEventListener('click', closeMobileNav);
 
+    // Allow link navigation before closing menu
     DOM.nav.querySelectorAll('.nav__link').forEach(link => {
-      link.addEventListener('click', () => {
-        if (DOM.nav.classList.contains('is-open')) closeMobileNav();
+      link.addEventListener('click', (e) => {
+        if (DOM.nav.classList.contains('is-open')) {
+          e.preventDefault();
+          const href = link.getAttribute('href');
+          // Close menu then navigate
+          DOM.nav.classList.remove('is-open');
+          DOM.hamburger.classList.remove('is-open');
+          backdrop.style.display = 'none';
+          document.body.style.overflow = '';
+          // Navigate after menu close
+          setTimeout(() => { window.location.href = href; }, 50);
+        }
       });
     });
 
