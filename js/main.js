@@ -30,31 +30,33 @@
   function setupMobileNav() {
     if (!DOM.hamburger || !DOM.nav) return;
 
+    // Create overlay backdrop for mobile menu
+    const backdrop = document.createElement('div');
+    backdrop.className = 'mobile-menu-overlay';
+    backdrop.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1070;transition:opacity 0.25s ease';
+    document.body.appendChild(backdrop);
+
     DOM.hamburger.addEventListener('click', () => {
       const isOpen = DOM.nav.classList.toggle('is-open');
       DOM.hamburger.classList.toggle('is-open', isOpen);
+      backdrop.style.display = isOpen ? 'block' : 'none';
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
-    // Close mobile nav when clicking overlay
-    if (DOM.overlay) {
-      DOM.overlay.addEventListener('click', closeMobileNav);
-    }
+    backdrop.addEventListener('click', closeMobileNav);
 
-    // Close mobile nav when clicking a link
     DOM.nav.querySelectorAll('.nav__link').forEach(link => {
       link.addEventListener('click', () => {
-        if (DOM.nav.classList.contains('is-open')) {
-          closeMobileNav();
-        }
+        if (DOM.nav.classList.contains('is-open')) closeMobileNav();
       });
     });
-  }
 
-  function closeMobileNav() {
-    DOM.nav.classList.remove('is-open');
-    if (DOM.hamburger) DOM.hamburger.classList.remove('is-open');
-    document.body.style.overflow = '';
+    function closeMobileNav() {
+      DOM.nav.classList.remove('is-open');
+      DOM.hamburger.classList.remove('is-open');
+      backdrop.style.display = 'none';
+      document.body.style.overflow = '';
+    }
   }
 
   // ---- Lightbox ----
