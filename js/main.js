@@ -33,7 +33,7 @@
     // Create overlay backdrop for mobile menu
     const backdrop = document.createElement('div');
     backdrop.className = 'mobile-menu-overlay';
-    backdrop.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:1070;transition:opacity 0.25s ease';
+    backdrop.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1060;transition:opacity 0.3s ease';
     document.body.appendChild(backdrop);
 
     DOM.hamburger.addEventListener('click', () => {
