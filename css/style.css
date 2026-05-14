@@ -174,55 +174,6 @@ ul { list-style: none; }
   background: var(--color-bg-alt);
 }
 
-/* Hamburger */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 48px;
-  height: 48px;
-  z-index: 1110;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
-.hamburger span {
-  display: block;
-  width: 22px;
-  height: 3px;
-  background: var(--color-text);
-  border-radius: 3px;
-  transition: all 0.3s ease;
-  pointer-events: none;
-}
-.hamburger.is-open span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.hamburger.is-open span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.is-open span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* Mobile menu */
-.mobile-menu-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 1050;
-  opacity: 0;
-  transition: opacity var(--transition);
-}
-.mobile-menu-overlay.is-open {
-  opacity: 1;
-}
-
 /* ===== Hero ===== */
 .hero {
   margin-top: var(--header-height);
