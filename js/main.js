@@ -5,7 +5,7 @@
 
   function init() {
     cacheDom();
-    setupMobileNav();
+    setupHamOverlay();
     setupLightbox();
     setupSmoothScroll();
     highlightCurrentNav();
@@ -15,8 +15,6 @@
   }
 
   function cacheDom() {
-    DOM.hamburger = document.getElementById('hamburger');
-    DOM.nav = document.getElementById('nav');
     DOM.lightbox = document.getElementById('lightbox');
     if (DOM.lightbox) {
       DOM.lightboxImg = DOM.lightbox.querySelector('.lightbox__image');
@@ -24,32 +22,22 @@
     }
   }
 
-  // ---- Mobile Nav ----
-  function setupMobileNav() {
-    if (!DOM.hamburger || !DOM.nav) return;
-
-    // Create overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'ham-overlay';
-    document.body.appendChild(overlay);
-
-    function open() {
-      DOM.nav.classList.add('is-open');
-      DOM.hamburger.classList.add('is-open');
-      overlay.classList.add('is-open');
-      document.body.style.overflow = 'hidden';
+  // ---- Hamburger overlay ----
+  function setupHamOverlay() {
+    const overlay = document.querySelector('.ham-overlay');
+    if (overlay) {
+      overlay.addEventListener('click', () => {
+        document.getElementById('hamToggle').checked = false;
+        document.body.style.overflow = '';
+      });
     }
-    function close() {
-      DOM.nav.classList.remove('is-open');
-      DOM.hamburger.classList.remove('is-open');
-      overlay.classList.remove('is-open');
-      document.body.style.overflow = '';
+    // Track checkbox state for body overflow
+    const hamToggle = document.getElementById('hamToggle');
+    if (hamToggle) {
+      hamToggle.addEventListener('change', () => {
+        document.body.style.overflow = hamToggle.checked ? 'hidden' : '';
+      });
     }
-
-    DOM.hamburger.addEventListener('click', () => {
-      DOM.nav.classList.contains('is-open') ? close() : open();
-    });
-    overlay.addEventListener('click', close);
   }
 
   // ---- Lightbox ----
