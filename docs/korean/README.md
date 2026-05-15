@@ -1,6 +1,8 @@
 # Habasit 한글 기술자료 PDF
 
-이 디렉토리에는 다음 PDF 파일들이 위치해야 합니다:
+모든 PDF 파일이 준비되어 있으며, 하바지트(Habasit) 공식 파트너인 남일벨트시스템을 통해 제공됩니다.
+
+## 보유 PDF 목록 (22종)
 
 - `habasync-timing-belts-kr.pdf` - HabaSYNC 타이밍 벨트
 - `habasync-wide-kr.pdf` - 와이드 타이밍 벨트
@@ -24,5 +26,3 @@
 - `tools-accessories-kr.pdf` - 제작 공구 및 액세서리
 - `habiplast-kr.pdf` - HabiPLAST 열가소성 프로파일
 - `wide-timing-tire-kr.pdf` - 타이어용 와이드 타이밍 벨트
-
-위 PDF 파일들은 하바지트(Habasit) 공식 파트너인 남일벨트시스템을 통해 준비 중입니다.
