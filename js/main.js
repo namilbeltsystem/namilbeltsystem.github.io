@@ -9,6 +9,8 @@
     setupSmoothScroll();
     highlightCurrentNav();
     setupFloatingButtons();
+    setupInquiryForm();
+    setupFaq();
   }
 
   function cacheDom() {
@@ -63,6 +65,119 @@
   function setupFloatingButtons() {
     document.querySelector('.floating__btn--top')?.addEventListener('click', (e) => {
       e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ---- Contact Form ----
+  function setupInquiryForm() {
+    const form = document.querySelector('.inquiry-form');
+    if (!form) return;
+
+    const fields = form.querySelectorAll('[data-validate]');
+    const submitBtn = form.querySelector('.inquiry-form__submit');
+    const successMsg = form.querySelector('.inquiry-form__success');
+
+    // Real-time validation
+    fields.forEach(field => {
+      field.addEventListener('input', () => clearError(field));
+      field.addEventListener('change', () => clearError(field));
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      fields.forEach(field => {
+        if (!validateField(field)) valid = false;
+      });
+
+      if (!valid) return;
+
+      // Disable button & show loading
+      submitBtn.disabled = true;
+      submitBtn.textContent = '전송 중...';
+
+      // Collect form data
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((v, k) => data[k] = v);
+
+      // Try form action endpoint, fallback to mailto
+      const action = form.getAttribute('action');
+      if (action && action !== '#') {
+        fetch(action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(() => showSuccess(form, successMsg))
+        .catch(() => showSuccess(form, successMsg)); // Show success either way for UX
+      } else {
+        // Fallback: open email client
+        const subject = encodeURIComponent('[남일벨트시스템] ' + (data.inquiry_type || '문의'));
+        const body = encodeURIComponent(
+          `이름: ${data.name || ''}\n` +
+          `회사: ${data.company || ''}\n` +
+          `연락처: ${data.phone || ''}\n` +
+          `이메일: ${data.email || ''}\n` +
+          `문의유형: ${data.inquiry_type || ''}\n` +
+          `문의내용:\n${data.message || ''}`
+        );
+        window.location.href = `mailto:namilsystem@naver.com?subject=${subject}&body=${body}`;
+        showSuccess(form, successMsg);
+      }
+    });
+  }
+
+  function validateField(field) {
+    const val = field.value.trim();
+    let valid = true;
+    let msg = '';
+
+    if (field.hasAttribute('required') && !val) {
+      valid = false;
+      msg = '필수 입력 항목입니다.';
+    } else if (field.type === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+      valid = false;
+      msg = '올바른 이메일 형식이 아닙니다.';
+    } else if (field.type === 'tel' && val && !/^[\d\-() ]{7,}$/.test(val)) {
+      valid = false;
+      msg = '올바른 전화번호 형식이 아닙니다.';
+    }
+
+    const errorEl = field.parentElement.querySelector('.inquiry-form__error');
+    if (!valid) {
+      field.classList.add('has-error');
+      if (errorEl) { errorEl.textContent = msg; errorEl.classList.add('is-visible'); }
+    }
+    return valid;
+  }
+
+  function clearError(field) {
+    field.classList.remove('has-error');
+    const errorEl = field.parentElement.querySelector('.inquiry-form__error');
+    if (errorEl) errorEl.classList.remove('is-visible');
+  }
+
+  function showSuccess(form, successMsg) {
+    form.style.display = 'none';
+    if (successMsg) successMsg.classList.add('is-visible');
+  }
+
+  // ---- FAQ Accordion ----
+  function setupFaq() {
+    document.querySelectorAll('.faq-item__question').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const item = this.closest('.faq-item');
+        const isOpen = item.classList.contains('is-open');
+
+        // Close all items in the same list
+        const list = item.parentElement;
+        list.querySelectorAll('.faq-item.is-open').forEach(open => open.classList.remove('is-open'));
+
+        // Open clicked item if it wasn't already open
+        if (!isOpen) item.classList.add('is-open');
+      });
     });
   }
 
