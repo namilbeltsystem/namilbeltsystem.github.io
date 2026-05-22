@@ -7,8 +7,7 @@
 - **홈** (`index.html`) - 메인 페이지
 - **회사소개** (`about.html`) - 회사 소개
 - **상담문의** (`contact.html`) - 연락처 및 문의
-- **벨트 종류 및 시스템** (`belt-types.html`) - 6종 벨트 + 시스템 서비스
-- **하바지트 카탈로그** (`habasit-catalog.html`) - Habasit 제품 상세
+- **벨트 종류 및 시스템** (`belt-types.html`) - 6종 벨트 + 시스템 서비스 + Habasit 제품 상세
 
 ## 연락처
 
