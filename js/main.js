@@ -188,7 +188,7 @@
     if (!container) return;
 
     // 설정: 티스토리 블로그 ID (예: 'namilsystem')
-    // 네이버 블로그는 RSS 미지원으로 자동 연동 불가
+    // 네이버 블로그는 RSS 미지원으로 자동 연동 불가, 티스토리 사용 중
     const tistoryId = 'namilsystem'; // ← 티스토리 블로그 ID로 변경하세요
     const rssUrl = 'https://' + tistoryId + '.tistory.com/rss';
     const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
@@ -200,11 +200,17 @@
           container.innerHTML = '<p style="text-align:center;color:var(--color-text-muted)">아직 등록된 블로그 글이 없습니다.</p>';
           return;
         }
+        function decodeHtml(text) {
+          var txt = document.createElement('textarea');
+          txt.innerHTML = text;
+          return txt.value;
+        }
         var html = '<div class="blog-feed__list">';
         data.items.slice(0, 5).forEach(function(item) {
           var date = new Date(item.pubDate).toLocaleDateString('ko-KR');
+          var title = decodeHtml(item.title);
           html += '<a href="' + item.link + '" target="_blank" rel="noopener" class="blog-feed__item">' +
-            '<span class="blog-feed__title">' + item.title + '</span>' +
+            '<span class="blog-feed__title">' + title + '</span>' +
             '<span class="blog-feed__date">' + date + '</span></a>';
         });
         html += '</div>';
