@@ -1274,6 +1274,16 @@ ul { list-style: none; }
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  word-break: keep-all;
+}
+@media (max-width: 640px) {
+  .blog-feed__title {
+    white-space: normal;
+    text-overflow: clip;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
 }
 .blog-feed__date {
   flex-shrink: 0;
