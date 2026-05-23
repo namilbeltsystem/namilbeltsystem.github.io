@@ -11,6 +11,7 @@
     setupFloatingButtons();
     setupInquiryForm();
     setupFaq();
+    setupBlogFeed();
   }
 
   function cacheDom() {
@@ -179,6 +180,39 @@
         if (!isOpen) item.classList.add('is-open');
       });
     });
+  }
+
+  // ---- Blog Feed (Tistory RSS via rss2json) ----
+  function setupBlogFeed() {
+    const container = document.getElementById('blog-feed');
+    if (!container) return;
+
+    // 설정: 티스토리 블로그 ID (예: 'namilsystem')
+    // 네이버 블로그는 RSS 미지원으로 자동 연동 불가
+    const tistoryId = 'namilsystem'; // ← 티스토리 블로그 ID로 변경하세요
+    const rssUrl = 'https://' + tistoryId + '.tistory.com/rss';
+    const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
+
+    fetch(apiUrl)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.status !== 'ok' || !data.items || data.items.length === 0) {
+          container.innerHTML = '<p style="text-align:center;color:var(--color-text-muted)">아직 등록된 블로그 글이 없습니다.</p>';
+          return;
+        }
+        var html = '<div class="blog-feed__list">';
+        data.items.slice(0, 5).forEach(function(item) {
+          var date = new Date(item.pubDate).toLocaleDateString('ko-KR');
+          html += '<a href="' + item.link + '" target="_blank" rel="noopener" class="blog-feed__item">' +
+            '<span class="blog-feed__title">' + item.title + '</span>' +
+            '<span class="blog-feed__date">' + date + '</span></a>';
+        });
+        html += '</div>';
+        container.innerHTML = html;
+      })
+      .catch(function() {
+        container.innerHTML = '<p style="text-align:center;color:var(--color-text-muted)">블로그 피드를 불러오는 중 문제가 발생했습니다.</p>';
+      });
   }
 
   // ----

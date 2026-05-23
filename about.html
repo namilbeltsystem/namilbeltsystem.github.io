@@ -9,6 +9,10 @@
 <meta property="og:title" content="회사소개 | 남일벨트시스템">
 <meta property="og:image" content="images/about-1.png">
 <meta property="og:description" content="산업용 벨트, 컨베이어 벨트, 컨베이어 시스템 전문 기업 남일벨트시스템입니다.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="회사소개 | 남일벨트시스템">
+<meta name="twitter:description" content="산업용 벨트, 컨베이어 벨트, 컨베이어 시스템 전문 기업 남일벨트시스템입니다.">
+<meta name="twitter:image" content="images/about-1.png">
 <meta name="description" content="남일벨트시스템 회사소개 - 대표 홍종수, 서울 동대문구 소재. 산업용 컨베이어 벨트 설계·설치·유지보수 전문. 전화 02-6084-7795.">
 <title>회사소개 - 컨베이어 벨트 전문기업 | 남일벨트시스템</title>
 <link rel="canonical" href="https://namilbeltsystem.github.io/about.html">
@@ -43,7 +47,23 @@
 </header>
 
 <main>
-<section class="page-hero">
+<nav aria-label="breadcrumb" style="margin-top:var(--header-height);background:var(--color-bg-alt);border-bottom:1px solid var(--color-border);padding:12px 0;font-size:var(--font-size-sm);color:var(--color-text-muted)">
+  <div class="container">
+    <a href="index.html">홈</a> <span style="margin:0 8px">/</span> <span style="color:var(--color-text-light)">회사소개</span>
+  </div>
+</nav>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "홈", "item": "https://namilbeltsystem.github.io/"},
+    {"@type": "ListItem", "position": 2, "name": "회사소개", "item": "https://namilbeltsystem.github.io/about.html"}
+  ]
+}
+</script>
+
+  <section class="page-hero">
     <div class="container">
       <h1 class="page-hero__title">회사소개</h1>
       <p class="page-hero__subtitle">최고의 컨베이어 벨트를 제공하는 남일벨트시스템입니다</p>
@@ -57,14 +77,19 @@
         남일벨트시스템은 산업용 컨베이어 벨트 전문 기업으로, 세계적인 벨트 제조사 <strong>하바지트(Habasit)</strong>의 공식 파트너입니다.
       </p>
       <p style="line-height:2;color:var(--color-text-light);margin-bottom:20px">
-        경량·고하중·식품·타이밍·모놀리식 등 다양한 컨베이어 벨트와 모듈러 벨트, 컨베이어 체인, 동력 전달 벨트, 컨베이어 부품까지 폭넓은 제품군을 공급하고 있습니다.
+        경량·고하중·식품·타이밍·모놀리식 등 다양한 <a href="belt-types.html">컨베이어 벨트</a>와 모듈러 벨트, 컨베이어 체인, 동력 전달 벨트, 컨베이어 부품까지 폭넓은 제품군을 공급하고 있습니다.
       </p>
       <p style="line-height:2;color:var(--color-text-light);margin-bottom:20px">
-        고객의 생산 현장에 최적화된 맞춤형 컨베이어 솔루션을 제공합니다. 무료 기술 상담부터 시스템 설계, 전문 엔지니어의 현장 설치 및 시운전, 정기 유지보수까지 원스톱 서비스를 통해 고객의 생산성을 극대화합니다.
+        고객의 생산 현장에 최적화된 맞춤형 컨베이어 솔루션을 제공합니다. 물론 기술 상담고터 시스템 설계, 전문 엔지니어의 현장 설치 및 시운전, 정기 유지보수까지 원스톱 서비스를 통해 고객의 생산성을 극대화합니다.
       </p>
       <p style="line-height:2;color:var(--color-text-light)">
         앞으로도 최고 품질의 제품과 신뢰할 수 있는 서비스로 고객과 함께 성장하는 남일벨트시스템이 되겠습니다.
       </p>
+
+      <div class="contact-buttons" style="margin-top:40px">
+        <a href="belt-types.html" class="btn btn--primary">&#9881; 벨트 종류 보기</a>
+        <a href="contact.html" class="btn btn--accent">&#128222; 상담 문의</a>
+      </div>
     </div>
   </section>
 </main>

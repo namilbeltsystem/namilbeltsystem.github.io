@@ -168,6 +168,17 @@ PAGES = {
         "canonical": f"{SITE_URL}/industry-trends.html",
         "extra_head": "",
     },
+    "habasit-catalog": {
+        "file": "habasit-catalog.html",
+        "nav_active": "",
+        "title": "전체 카탈로그 - 하바지트 전 제품군 | 남일벨트시스템",
+        "description": "Habasit 하바지트 전체 카탈로그 - 패브릭 벨트, 타이밍 벨트, 모듈러 벨트, 모놀리식 벨트, 식품 벨트, 고하중 벨트, 체인, 플라스틱 모듈, 공구 및 액세서리.",
+        "og_title": "전체 카탈로그 | 남일벨트시스템",
+        "og_image": "images/logo.png",
+        "og_description": "Habasit 하바지트 전 제품군 카탈로그를 한눈에 확인하세요. 벨트, 체인, 플라스틱 모듈, 공구 및 액세서리.",
+        "canonical": f"{SITE_URL}/habasit-catalog.html",
+        "extra_head": "",
+    },
 }
 
 def nav_class(page_key, active):
@@ -185,13 +196,17 @@ def build():
         with open(content_file, encoding="utf-8") as f:
             body = f.read().strip()
 
-        # Open Graph meta tags
+        # Open Graph & Twitter Card meta tags
         og_meta = (
             '<meta property="og:type" content="website">\n'
             f'<meta property="og:site_name" content="남일벨트시스템">\n'
             f'<meta property="og:title" content="{meta["og_title"]}">\n'
             f'<meta property="og:image" content="{meta["og_image"]}">\n'
-            f'<meta property="og:description" content="{meta["og_description"]}">'
+            f'<meta property="og:description" content="{meta["og_description"]}">\n'
+            '<meta name="twitter:card" content="summary_large_image">\n'
+            f'<meta name="twitter:title" content="{meta["og_title"]}">\n'
+            f'<meta name="twitter:description" content="{meta["og_description"]}">\n'
+            f'<meta name="twitter:image" content="{meta["og_image"]}">'
         )
 
         desc_meta = f'<meta name="description" content="{meta["description"]}">'

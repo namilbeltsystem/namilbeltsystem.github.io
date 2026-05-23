@@ -1,0 +1,124 @@
+name: Update Blog Feed
+
+on:
+  schedule:
+    # 매 3시간마다 실행 (UTC 기준)
+    - cron: '0 */3 * * *'
+  workflow_dispatch: # 수동 실행도 가능
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch Tistory RSS and update blog section
+        run: |
+          python3 << 'PYEOF'
+          import urllib.request, xml.etree.ElementTree as ET, html, os, re
+
+          # 사용자 설정: 티스토리 블로그 ID
+          TISTORY_ID = os.environ.get('TISTORY_ID', 'namilsystem')
+          RSS_URL = f'https://{TISTORY_ID}.tistory.com/rss'
+
+          try:
+              req = urllib.request.Request(RSS_URL, headers={'User-Agent': 'Mozilla/5.0'})
+              with urllib.request.urlopen(req, timeout=15) as res:
+                  data = res.read().decode('utf-8')
+          except Exception as e:
+              print('RSS fetch failed:', e)
+              exit(0)
+
+          root = ET.fromstring(data)
+          ns = {'atom': 'http://www.w3.org/2005/Atom'}
+          entries = root.findall('.//atom:entry', ns)
+
+          if not entries:
+              # RSS 2.0 fallback
+              items = root.findall('.//item')
+              entries = items
+              ns = {}
+
+          lines = ['  <section class="section">',
+                   '    <div class="container">',
+                   '      <h2 class="section__title section__title--center">최신 소식</h2>',
+                   '      <p class="section__subtitle text-center">컨베이어 벨트 전문 지식과 업계 소식을 전해드립니다</p>',
+                   '      <div id="blog-feed" style="max-width:720px;margin:0 auto">',
+                   '        <div class="blog-feed__list">']
+
+          for entry in entries[:5]:
+              title = ''
+              link = ''
+              date = ''
+              if ns:
+                  t = entry.find('atom:title', ns)
+                  l = entry.find('atom:link', ns)
+                  d = entry.find('atom:published', ns) or entry.find('atom:updated', ns)
+                  title = (t.text or '') if t is not None else ''
+                  link = l.attrib.get('href', '') if l is not None else ''
+                  date = (d.text or '')[:10] if d is not None else ''
+              else:
+                  t = entry.find('title')
+                  l = entry.find('link')
+                  d = entry.find('pubDate')
+                  title = (t.text or '') if t is not None else ''
+                  link = (l.text or '') if l is not None else ''
+                  date = (d.text or '')[:10] if d is not None else ''
+              title = html.escape(title)
+              lines.append(f'          <a href="{link}" target="_blank" rel="noopener" class="blog-feed__item"><span class="blog-feed__title">{title}</span><span class="blog-feed__date">{date}</span></a>')
+
+          lines += ['        </div>',
+                    '      </div>',
+                    '      <div style="text-align:center;margin-top:24px">',
+                    '        <a href="https://blog.naver.com/namilsystem" target="_blank" rel="noopener" class="btn btn--outline">&#127760; 네이버 블로그 방문</a>',
+                    '      </div>',
+                    '    </div>',
+                    '  </section>']
+
+          new_section = '\n'.join(lines)
+
+          with open('content/index.html', 'r', encoding='utf-8') as f:
+              content = f.read()
+
+          # 기존 블로그 섹션 제거 (id="blog-feed"가 포함된 섹션)
+          pattern = r'\n  <section class="section">\n    <div class="container">\n      <h2 class="section__title section__title--center">최신 소식</h2>.*?</section>'
+          content = re.sub(pattern, '', content, flags=re.DOTALL)
+
+          # 서비스 안내 섹션 뒤에 추가
+          insert_after = '  </section>\n'
+          # 맨 마지막 </section> 뒤에 삽입
+          pos = content.rfind(insert_after)
+          if pos != -1:
+              pos += len(insert_after)
+              content = content[:pos] + '\n' + new_section + '\n'
+
+          with open('content/index.html', 'w', encoding='utf-8') as f:
+              f.write(content)
+
+          print('Blog section updated with', len(entries[:5]), 'posts.')
+          PYEOF
+        env:
+          TISTORY_ID: ${{ vars.TISTORY_ID || 'namilsystem' }}
+
+      - name: Build HTML
+        run: python3 build.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-update blog feed from Tistory"
+            git push
+          fi
