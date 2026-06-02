@@ -18,4 +18,4 @@
 | 전화 | 02-6084-7795 |
 | 팩스 | (02)6403-9380 |
 | 이메일 | namilsystem@naver.com |
-| 블로그 | https://blog.naver.com/namilsystem |
+| 블로그 | https://namilsystem.tistory.com/ |

@@ -40,6 +40,7 @@ HEADER = (
     '        <li><a href="about.html" class="nav__link{{NAV_ABOUT}}">회사소개</a></li>\n'
     '        <li><a href="contact.html" class="nav__link{{NAV_CONTACT}}">상담문의</a></li>\n'
     '        <li><a href="belt-types.html" class="nav__link{{NAV_BELT}}">벨트 종류 및 시스템</a></li>\n'
+    '        <li><a href="habasit-catalog.html" class="nav__link{{NAV_CATALOG}}">하바지트 카탈로그</a></li>\n'
     '        <li><a href="industry-trends.html" class="nav__link{{NAV_TRENDS}}">벨트 산업 동향</a></li>\n'
     '      </ul>\n'
     '    </nav>\n'
@@ -61,7 +62,7 @@ FOOTER = (
     '        <p>전화: <a href="tel:02-6084-7795">02-6084-7795</a></p>\n'
     '        <p>팩스: (02)6403-9380</p>\n'
     '        <p>이메일: <a href="mailto:namilsystem@naver.com">namilsystem@naver.com</a></p>\n'
-    '        <p>블로그: <a href="https://blog.naver.com/namilsystem" target="_blank" rel="noopener">blog.naver.com/namilsystem</a></p>\n'
+    '        <p>블로그: <a href="https://namilsystem.tistory.com/" target="_blank" rel="noopener">namilsystem.tistory.com</a></p>\n'
     '      </div>\n'
     '    </div>\n'
     '    <div class="footer__bottom">\n'
@@ -75,7 +76,7 @@ FLOATING = (
     '<div class="floating">\n'
     '  <a href="tel:02-6084-7795" class="floating__btn" title="전화" aria-label="전화">&#128222;</a>\n'
     '  <a href="mailto:namilsystem@naver.com" class="floating__btn" title="이메일" aria-label="이메일">&#9993;</a>\n'
-    '  <a href="https://blog.naver.com/namilsystem" target="_blank" rel="noopener" class="floating__btn" title="블로그" aria-label="블로그">&#127760;</a>\n'
+    '  <a href="https://namilsystem.tistory.com/" target="_blank" rel="noopener" class="floating__btn" title="블로그" aria-label="블로그">&#127760;</a>\n'
     '  <button class="floating__btn floating__btn--top" title="맨 위로" aria-label="맨 위로">&#9650;</button>\n'
     '</div>'
 )
@@ -170,7 +171,7 @@ PAGES = {
     },
     "habasit-catalog": {
         "file": "habasit-catalog.html",
-        "nav_active": "",
+        "nav_active": "catalog",
         "title": "전체 카탈로그 - 하바지트 전 제품군 | 남일벨트시스템",
         "description": "Habasit 하바지트 전체 카탈로그 - 패브릭 벨트, 타이밍 벨트, 모듈러 벨트, 모놀리식 벨트, 식품 벨트, 고하중 벨트, 체인, 플라스틱 모듈, 공구 및 액세서리.",
         "og_title": "전체 카탈로그 | 남일벨트시스템",
@@ -218,6 +219,7 @@ def build():
             "{{NAV_ABOUT}}": nav_class(active, "about"),
             "{{NAV_CONTACT}}": nav_class(active, "contact"),
             "{{NAV_BELT}}": nav_class(active, "belt"),
+            "{{NAV_CATALOG}}": nav_class(active, "catalog"),
             "{{NAV_TRENDS}}": nav_class(active, "trends"),
         }
         header_html = HEADER
