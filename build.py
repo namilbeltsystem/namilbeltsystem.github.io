@@ -6,12 +6,14 @@ import json, os, sys
 SITE_URL = "https://xn--q20bp1ulxengk5sqrqshc.kr"
 GA_ID = "G-RKW5E36SZV"
 NAVER_VERIFY = "c41bb3c2d1f3c37a7bf2b12afccdb632f261c4a1"
+GOOGLE_VERIFY = "WbPgR_X6Y0ddPQl388pQvF2tQiBfU4DNU6dNJZ_fqT8"
 
 # Shared across all pages
 HEAD_COMMON = (
     '<meta charset="UTF-8">\n'
     '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
     f'<meta name="naver-site-verification" content="{NAVER_VERIFY}">\n'
+    f'<meta name="google-site-verification" content="{GOOGLE_VERIFY}">\n'
     '{{OG_META}}\n'
     '{{DESC_META}}\n'
     '<title>{{TITLE}}</title>\n'
