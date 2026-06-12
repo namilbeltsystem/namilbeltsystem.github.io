@@ -3,7 +3,7 @@
 
 import json, os, sys
 
-SITE_URL = "https://namilbeltsystem.github.io"
+SITE_URL = "https://xn--q20bp1ulxengk5sqrqshc.kr"
 GA_ID = "G-RKW5E36SZV"
 NAVER_VERIFY = "c41bb3c2d1f3c37a7bf2b12afccdb632f261c4a1"
 
