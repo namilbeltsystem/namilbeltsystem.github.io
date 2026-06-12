@@ -5,7 +5,7 @@ import json, os, sys
 
 SITE_URL = "https://xn--q20bp1ulxengk5sqrqshc.kr"
 GA_ID = "G-RKW5E36SZV"
-NAVER_VERIFY = "c41bb3c2d1f3c37a7bf2b12afccdb632f261c4a1"
+NAVER_VERIFY = "d9dd62e476cab31e499018ef4ea7e29990f4531f"
 GOOGLE_VERIFY = "WbPgR_X6Y0ddPQl388pQvF2tQiBfU4DNU6dNJZ_fqT8"
 
 # Shared across all pages
