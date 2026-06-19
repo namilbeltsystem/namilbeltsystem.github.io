@@ -182,10 +182,27 @@ PAGES = {
         "canonical": f"{SITE_URL}/habasit-catalog.html",
         "extra_head": "",
     },
+    "privacy": {
+        "file": "privacy.html",
+        "nav_active": "privacy",
+        "title": "개인정보 처리방침 | 남일벨트시스템",
+        "description": "남일벨트시스템 개인정보 처리방침 - 수집하는 개인정보 항목, 이용 목적, 보유 기간 등 안내.",
+        "og_title": "개인정보 처리방침 | 남일벨트시스템",
+        "og_image": "images/logo.png",
+        "og_description": "남일벨트시스템 개인정보 처리방침 안내",
+        "canonical": f"{SITE_URL}/privacy.html",
+        "extra_head": "",
+    },
 }
 
 def nav_class(page_key, active):
     return ' nav__link--active' if page_key == active else ''
+
+def abs_url(path):
+    """상대 경로를 사이트 절대 URL로 변환 (OG/Twitter 이미지는 절대 URL이어야 함)."""
+    if path.startswith('http://') or path.startswith('https://'):
+        return path
+    return SITE_URL.rstrip('/') + '/' + path.lstrip('/')
 
 def build():
     """모든 페이지 생성"""
@@ -199,17 +216,19 @@ def build():
         with open(content_file, encoding="utf-8") as f:
             body = f.read().strip()
 
-        # Open Graph & Twitter Card meta tags
+        # Open Graph & Twitter Card meta tags (이미지/URL은 절대 경로)
+        og_image_url = abs_url(meta["og_image"])
         og_meta = (
             '<meta property="og:type" content="website">\n'
             f'<meta property="og:site_name" content="남일벨트시스템">\n'
             f'<meta property="og:title" content="{meta["og_title"]}">\n'
-            f'<meta property="og:image" content="{meta["og_image"]}">\n'
+            f'<meta property="og:url" content="{meta["canonical"]}">\n'
+            f'<meta property="og:image" content="{og_image_url}">\n'
             f'<meta property="og:description" content="{meta["og_description"]}">\n'
             '<meta name="twitter:card" content="summary_large_image">\n'
             f'<meta name="twitter:title" content="{meta["og_title"]}">\n'
             f'<meta name="twitter:description" content="{meta["og_description"]}">\n'
-            f'<meta name="twitter:image" content="{meta["og_image"]}">'
+            f'<meta name="twitter:image" content="{og_image_url}">'
         )
 
         desc_meta = f'<meta name="description" content="{meta["description"]}">'

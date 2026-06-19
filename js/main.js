@@ -108,7 +108,10 @@
       if (action && action !== '#') {
         fetch(action, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
           body: JSON.stringify(data)
         })
         .then(() => showSuccess(form, successMsg))
@@ -131,19 +134,27 @@
   }
 
   function validateField(field) {
-    const val = field.value.trim();
     let valid = true;
     let msg = '';
 
-    if (field.hasAttribute('required') && !val) {
-      valid = false;
-      msg = '필수 입력 항목입니다.';
-    } else if (field.type === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-      valid = false;
-      msg = '올바른 이메일 형식이 아닙니다.';
-    } else if (field.type === 'tel' && val && !/^[\d\-() ]{7,}$/.test(val)) {
-      valid = false;
-      msg = '올바른 전화번호 형식이 아닙니다.';
+    // 체크박스(개인정보 동의 등)는 value가 아닌 checked 여부로 검증
+    if (field.type === 'checkbox') {
+      if (field.hasAttribute('required') && !field.checked) {
+        valid = false;
+        msg = '필수 동의 항목입니다.';
+      }
+    } else {
+      const val = field.value.trim();
+      if (field.hasAttribute('required') && !val) {
+        valid = false;
+        msg = '필수 입력 항목입니다.';
+      } else if (field.type === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        valid = false;
+        msg = '올바른 이메일 형식이 아닙니다.';
+      } else if (field.type === 'tel' && val && !/^[\d\-() ]{7,}$/.test(val)) {
+        valid = false;
+        msg = '올바른 전화번호 형식이 아닙니다.';
+      }
     }
 
     const errorEl = field.parentElement.querySelector('.inquiry-form__error');

@@ -24,6 +24,22 @@ jobs:
         run: |
           python3 << 'PYEOF'
           import urllib.request, xml.etree.ElementTree as ET, html, os, re
+          from email.utils import parsedate_to_datetime
+          from datetime import datetime
+
+          def fmt_date(raw):
+              """RSS pubDate(RFC-2822)와 Atom published(ISO-8601)를 모두 YYYY-MM-DD로 변환."""
+              raw = (raw or '').strip()
+              if not raw:
+                  return ''
+              try:
+                  return datetime.fromisoformat(raw.replace('Z', '+00:00')).strftime('%Y-%m-%d')
+              except Exception:
+                  pass
+              try:
+                  return parsedate_to_datetime(raw).strftime('%Y-%m-%d')
+              except Exception:
+                  return raw[:10]
 
           # 사용자 설정: 티스토리 블로그 ID
           TISTORY_ID = os.environ.get('TISTORY_ID', 'namilsystem')
@@ -64,15 +80,17 @@ jobs:
                   d = entry.find('atom:published', ns) or entry.find('atom:updated', ns)
                   title = (t.text or '') if t is not None else ''
                   link = l.attrib.get('href', '') if l is not None else ''
-                  date = (d.text or '')[:10] if d is not None else ''
+                  date = fmt_date(d.text) if d is not None else ''
               else:
                   t = entry.find('title')
                   l = entry.find('link')
                   d = entry.find('pubDate')
                   title = (t.text or '') if t is not None else ''
                   link = (l.text or '') if l is not None else ''
-                  date = (d.text or '')[:10] if d is not None else ''
-              title = html.escape(title)
+                  date = fmt_date(d.text) if d is not None else ''
+              # RSS 제목에 HTML 엔티티(&mdash; 등)가 문자열로 들어있으므로
+              # 먼저 unescape로 실제 문자로 변환한 뒤 안전하게 다시 escape
+              title = html.escape(html.unescape(title))
               lines.append(f'          <a href="{link}" target="_blank" rel="noopener" class="blog-feed__item"><span class="blog-feed__title">{title}</span><span class="blog-feed__date">{date}</span></a>')
 
           lines += ['        </div>',
