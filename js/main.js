@@ -192,7 +192,8 @@
       }
     }
 
-    const errorEl = field.parentElement.querySelector('.inquiry-form__error');
+    const group = field.closest('.inquiry-form__group');
+    const errorEl = group ? group.querySelector('.inquiry-form__error') : null;
     if (!valid) {
       field.classList.add('has-error');
       if (errorEl) { errorEl.textContent = msg; errorEl.classList.add('is-visible'); }
@@ -202,7 +203,8 @@
 
   function clearError(field) {
     field.classList.remove('has-error');
-    const errorEl = field.parentElement.querySelector('.inquiry-form__error');
+    const group = field.closest('.inquiry-form__group');
+    const errorEl = group ? group.querySelector('.inquiry-form__error') : null;
     if (errorEl) errorEl.classList.remove('is-visible');
   }
 

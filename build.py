@@ -85,13 +85,13 @@ FLOATING = (
     '  <a href="tel:02-6084-7795" class="floating__btn" title="전화" aria-label="전화">&#128222;</a>\n'
     '  <a href="mailto:namilsystem@naver.com" class="floating__btn" title="이메일" aria-label="이메일">&#9993;</a>\n'
     '  <a href="https://namilsystem.tistory.com/" target="_blank" rel="noopener" class="floating__btn" title="블로그" aria-label="블로그">&#127760;</a>\n'
-    '  <button class="floating__btn floating__btn--top" title="맨 위로" aria-label="맨 위로">&#9650;</button>\n'
+    '  <button type="button" class="floating__btn floating__btn--top" title="맨 위로" aria-label="맨 위로">&#9650;</button>\n'
     '</div>'
 )
 
 LIGHTBOX = (
     '<div class="lightbox" id="lightbox">\n'
-    '  <button class="lightbox__close" aria-label="닫기">&times;</button>\n'
+    '  <button type="button" class="lightbox__close" aria-label="닫기">&times;</button>\n'
     '  <img class="lightbox__image" src="" alt="">\n'
     '</div>'
 )

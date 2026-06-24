@@ -11,13 +11,13 @@ python build.py
 ```
 
 - GitHub Pages로 자동 배포(`.github/workflows/pages.yml`)
-- 티스토리 블로그 RSS가 3시간마다 `index.html`에 자동 연동(`.github/workflows/update-blog.yml`)
+- 티스토리 블로그 최신 글은 `news.html`에서 rss2json API로 실시간 연동(`js/main.js`의 `setupBlogFeed`)
 
 ## 사이트 구조
 
 | 페이지 | 파일 | 설명 |
 |------|------|------|
-| 홈 | `index.html` | 전체 메뉴 버튼 그리드 + 블로그 최신 소식 |
+| 홈 | `index.html` | 전체 메뉴 버튼 그리드 + 상담문의 CTA |
 | 회사소개 | `about.html` | 미션·핵심가치·하바지트 파트너십·원스톱 프로세스 |
 | 벨트 종류 | `belt-types.html` | 6종 벨트 + 시스템 서비스 + 하바지트 기술 상세 |
 | 전체 카탈로그 | `habasit-catalog.html` | 제품군별 기술 자료(PDF) 다운로드 |
