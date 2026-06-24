@@ -36,14 +36,22 @@ HEADER = (
     '      <img src="images/logo.svg" alt="남일벨트시스템" height="36">\n'
     '      <span>남일벨트시스템</span>\n'
     '    </a>\n'
-    '    <nav class="nav" id="nav">\n'
+    '    <button class="nav-toggle" id="nav-toggle" type="button" '
+    'aria-label="메뉴 열기" aria-controls="nav" aria-expanded="false">\n'
+    '      <span class="nav-toggle__bar"></span>\n'
+    '      <span class="nav-toggle__bar"></span>\n'
+    '      <span class="nav-toggle__bar"></span>\n'
+    '    </button>\n'
+    '    <nav class="nav" id="nav" aria-label="주요 메뉴">\n'
     '      <ul class="nav__list">\n'
     '        <li><a href="index.html" class="nav__link{{NAV_HOME}}">홈</a></li>\n'
     '        <li><a href="about.html" class="nav__link{{NAV_ABOUT}}">회사소개</a></li>\n'
+    '        <li><a href="belt-types.html" class="nav__link{{NAV_BELT}}">벨트 종류</a></li>\n'
+    '        <li><a href="habasit-catalog.html" class="nav__link{{NAV_CATALOG}}">카탈로그</a></li>\n'
+    '        <li><a href="industry-trends.html" class="nav__link{{NAV_TRENDS}}">산업 동향</a></li>\n'
+    '        <li><a href="news.html" class="nav__link{{NAV_NEWS}}">최신 정보</a></li>\n'
+    '        <li><a href="faq.html" class="nav__link{{NAV_FAQ}}">자주 묻는 질문</a></li>\n'
     '        <li><a href="contact.html" class="nav__link{{NAV_CONTACT}}">상담문의</a></li>\n'
-    '        <li><a href="belt-types.html" class="nav__link{{NAV_BELT}}">벨트 종류 및 시스템</a></li>\n'
-    '        <li><a href="habasit-catalog.html" class="nav__link{{NAV_CATALOG}}">하바지트 카탈로그</a></li>\n'
-    '        <li><a href="industry-trends.html" class="nav__link{{NAV_TRENDS}}">벨트 산업 동향</a></li>\n'
     '      </ul>\n'
     '    </nav>\n'
     '  </div>\n'
@@ -56,9 +64,9 @@ FOOTER = (
     '    <div class="footer__grid">\n'
     '      <div class="footer__company">\n'
     '        <strong>남일벨트시스템</strong>\n'
-    '        <p>대표: 홍종수</p>\n'
-    '        <p>서울시 동대문구 한천로2길 16, 212호(덕암빌딩)</p>\n'
-    '        <p>사업자등록번호: 268-06-02265</p>\n'
+    '        <p>산업용 컨베이어 벨트 전문 기업 · 하바지트 공식 파트너</p>\n'
+    '        <p><a href="company-info.html">사업자 정보 보기</a></p>\n'
+    '        <p><a href="privacy.html">개인정보 처리방침</a></p>\n'
     '      </div>\n'
     '      <div class="footer__contact">\n'
     '        <p>전화: <a href="tel:02-6084-7795">02-6084-7795</a></p>\n'
@@ -115,14 +123,10 @@ PAGES = {
             '  "faxNumber": "+82-2-6403-9380",\n'
             '  "address": {\n'
             '    "@type": "PostalAddress",\n'
-            '    "addressLocality": "서울특별시 동대문구",\n'
-            '    "streetAddress": "한천로2길 16, 212호(덕암빌딩)"\n'
-            '  },\n'
-            '  "founder": {\n'
-            '    "@type": "Person",\n'
-            '    "name": "홍종수"\n'
-            '  },\n'
-            '  "taxID": "268-06-02265"\n'
+            '    "addressCountry": "KR",\n'
+            '    "addressRegion": "서울특별시",\n'
+            '    "addressLocality": "동대문구"\n'
+            '  }\n'
             '}\n'
             '</script>'
         ),
@@ -131,12 +135,25 @@ PAGES = {
         "file": "about.html",
         "nav_active": "about",
         "title": "회사소개 - 컨베이어 벨트 전문기업 | 남일벨트시스템",
-        "description": "남일벨트시스템 회사소개 - 대표 홍종수, 서울 동대문구 소재. 산업용 컨베이어 벨트 설계·설치·유지보수 전문. 전화 02-6084-7795.",
+        "description": "남일벨트시스템 회사소개 - 하바지트 공식 파트너. 산업용 컨베이어 벨트 설계·제작·설치·유지보수 원스톱 전문. 미션·핵심가치·서비스 프로세스를 소개합니다.",
         "og_title": "회사소개 | 남일벨트시스템",
         "og_image": "images/about-1.png",
         "og_description": "산업용 벨트, 컨베이어 벨트, 컨베이어 시스템 전문 기업 남일벨트시스템입니다.",
         "canonical": f"{SITE_URL}/about.html",
-        "extra_head": "",
+        "extra_head": (
+            '<script type="application/ld+json">\n'
+            '{\n'
+            '  "@context": "https://schema.org",\n'
+            '  "@type": "Organization",\n'
+            '  "name": "남일벨트시스템",\n'
+            '  "description": "산업용 컨베이어 벨트 전문기업 · 하바지트 공식 파트너",\n'
+            f'  "url": "{SITE_URL}/about.html",\n'
+            '  "telephone": "+82-2-6084-7795",\n'
+            '  "email": "namilsystem@naver.com",\n'
+            '  "sameAs": ["https://namilsystem.tistory.com/"]\n'
+            '}\n'
+            '</script>'
+        ),
     },
     "contact": {
         "file": "contact.html",
@@ -193,6 +210,64 @@ PAGES = {
         "canonical": f"{SITE_URL}/privacy.html",
         "extra_head": "",
     },
+    "company-info": {
+        "file": "company-info.html",
+        "nav_active": "company",
+        "title": "사업자 정보 | 남일벨트시스템",
+        "description": "남일벨트시스템 사업자 정보 - 상호, 소재지, 사업자등록번호, 연락처 안내. (개인정보 보호를 위해 별도 페이지에 공개합니다.)",
+        "og_title": "사업자 정보 | 남일벨트시스템",
+        "og_image": "images/logo.png",
+        "og_description": "남일벨트시스템 사업자 정보 안내 페이지",
+        "canonical": f"{SITE_URL}/company-info.html",
+        "extra_head": (
+            '<script type="application/ld+json">\n'
+            '{\n'
+            '  "@context": "https://schema.org",\n'
+            '  "@type": "LocalBusiness",\n'
+            '  "name": "남일벨트시스템",\n'
+            '  "description": "산업용 컨베이어 벨트 전문기업",\n'
+            f'  "url": "{SITE_URL}/",\n'
+            '  "telephone": "+82-2-6084-7795",\n'
+            '  "email": "namilsystem@naver.com",\n'
+            '  "faxNumber": "+82-2-6403-9380",\n'
+            '  "address": {\n'
+            '    "@type": "PostalAddress",\n'
+            '    "addressCountry": "KR",\n'
+            '    "addressRegion": "서울특별시",\n'
+            '    "addressLocality": "동대문구",\n'
+            '    "streetAddress": "한천로2길 16, 212호(덕암빌딩)"\n'
+            '  },\n'
+            '  "founder": {\n'
+            '    "@type": "Person",\n'
+            '    "name": "홍종수"\n'
+            '  },\n'
+            '  "taxID": "268-06-02265"\n'
+            '}\n'
+            '</script>'
+        ),
+    },
+    "news": {
+        "file": "news.html",
+        "nav_active": "news",
+        "title": "최신 정보 - 컨베이어 벨트 기술·업계 소식 | 남일벨트시스템",
+        "description": "남일벨트시스템 최신 정보 - 컨베이어 벨트 기술 자료, 설치·유지보수 노하우, 업계 동향을 블로그와 연동하여 한곳에서 확인하세요.",
+        "og_title": "최신 정보 | 남일벨트시스템",
+        "og_image": "images/logo.png",
+        "og_description": "컨베이어 벨트 최신 기술 자료와 업계 소식, 남일벨트시스템 블로그를 연동한 최신 정보",
+        "canonical": f"{SITE_URL}/news.html",
+        "extra_head": "",
+    },
+    "faq": {
+        "file": "faq.html",
+        "nav_active": "faq",
+        "title": "자주 묻는 질문 - 벨트 선정·견적·설치·A/S | 남일벨트시스템",
+        "description": "남일벨트시스템 자주 묻는 질문(FAQ) - 컨베이어 벨트 선정, 견적, 설치 기간, 최소 주문, 교체, 유지보수, 긴급 출장 등 고객 문의 정리.",
+        "og_title": "자주 묻는 질문 | 남일벨트시스템",
+        "og_image": "images/logo.png",
+        "og_description": "컨베이어 벨트 선정·견적·설치·유지보수 관련 자주 묻는 질문과 답변",
+        "canonical": f"{SITE_URL}/faq.html",
+        "extra_head": "",
+    },
 }
 
 def nav_class(page_key, active):
@@ -242,6 +317,8 @@ def build():
             "{{NAV_BELT}}": nav_class(active, "belt"),
             "{{NAV_CATALOG}}": nav_class(active, "catalog"),
             "{{NAV_TRENDS}}": nav_class(active, "trends"),
+            "{{NAV_NEWS}}": nav_class(active, "news"),
+            "{{NAV_FAQ}}": nav_class(active, "faq"),
         }
         header_html = HEADER
         for marker, cls in nav_map.items():

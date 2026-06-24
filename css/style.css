@@ -194,6 +194,43 @@ ul { list-style: none; }
   background: rgba(3, 199, 90, 0.06);
 }
 
+/* ===== Mobile Nav Toggle (Hamburger) ===== */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+.nav-toggle__bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin: 0 auto;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+.nav-toggle.is-active .nav-toggle__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle.is-active .nav-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.is-active .nav-toggle__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+body.nav-open {
+  overflow: hidden;
+}
+
 /* ===== Hero ===== */
 .hero {
   margin-top: var(--header-height);
@@ -583,6 +620,19 @@ ul { list-style: none; }
 .link-card__title {
   font-size: var(--font-size-base);
   font-weight: 700;
+}
+.link-card__desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* ===== Menu Grid (전체 메뉴 버튼 그리드) ===== */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 16px;
 }
 
 /* ===== Footer ===== */
@@ -1111,7 +1161,7 @@ ul { list-style: none; }
   transition: max-height 0.35s ease, padding 0.35s ease;
 }
 .faq-item.is-open .faq-item__answer {
-  max-height: 600px;
+  max-height: 1200px;
 }
 .faq-item__answer-inner {
   padding: 0 20px 20px;
@@ -1125,8 +1175,43 @@ ul { list-style: none; }
   :root {
     --header-height: 64px;
   }
-  .nav__link { font-size: 0.75rem; padding: 6px 8px; }
-  .nav__list { gap: 0; }
+
+  /* 햄버거 메뉴 + 모바일 nav 오버레이 */
+  .nav-toggle { display: flex; }
+  .nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-white);
+    overflow-y: auto;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.3s ease, visibility 0.3s ease;
+    box-shadow: var(--shadow-lg);
+    z-index: 999;
+  }
+  .nav.is-open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+  .nav__list {
+    flex-direction: column;
+    gap: 0;
+    padding: 12px 16px 32px;
+  }
+  .nav__link {
+    display: block;
+    padding: 16px 12px;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0;
+    white-space: normal;
+  }
+  .nav__link--active {
+    background: rgba(3, 199, 90, 0.08);
+  }
 
   .hero__title { font-size: var(--font-size-3xl); }
   .hero { min-height: 70vh; }
@@ -1207,10 +1292,13 @@ ul { list-style: none; }
     grid-template-columns: 1fr;
   }
 
-  .nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .nav::-webkit-scrollbar { display: none; }
-  .nav__link { font-size: 0.7rem; padding: 5px 6px; white-space: nowrap; }
-  .logo span { display: none; }
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .link-card { padding: 18px 12px; }
+  .link-card__icon { font-size: 1.6rem; margin-bottom: 8px; }
+
   .floating {
     right: 12px;
     bottom: 12px;

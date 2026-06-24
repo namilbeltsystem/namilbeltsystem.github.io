@@ -9,6 +9,7 @@
     setupSmoothScroll();
     highlightCurrentNav();
     setupFloatingButtons();
+    setupMobileNav();
     setupInquiryForm();
     setupFaq();
     setupBlogFeed();
@@ -66,6 +67,40 @@
   function setupFloatingButtons() {
     document.querySelector('.floating__btn--top')?.addEventListener('click', (e) => {
       e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ---- Mobile Navigation (Hamburger) ----
+  function setupMobileNav() {
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('nav');
+    if (!toggle || !nav) return;
+
+    const close = () => {
+      nav.classList.remove('is-open');
+      toggle.classList.remove('is-active');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', '메뉴 열기');
+      document.body.classList.remove('nav-open');
+    };
+    const open = () => {
+      nav.classList.add('is-open');
+      toggle.classList.add('is-active');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', '메뉴 닫기');
+      document.body.classList.add('nav-open');
+    };
+
+    toggle.addEventListener('click', () => {
+      nav.classList.contains('is-open') ? close() : open();
+    });
+    // 메뉴 링크 클릭 시 닫기
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    // 데스크톱으로 확장 시 닫기
+    window.addEventListener('resize', () => { if (window.innerWidth > 992) close(); });
+    // Escape 키로 닫기
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) close();
     });
   }
 
@@ -195,40 +230,56 @@
 
   // ---- Blog Feed (Tistory RSS via rss2json) ----
   function setupBlogFeed() {
-    const container = document.getElementById('blog-feed');
-    if (!container) return;
+    // 지원 컨테이너: 기존 #blog-feed (최대 5) + [data-blog-feed] (data-limit 만큼)
+    const containers = [];
+    const legacy = document.getElementById('blog-feed');
+    if (legacy) containers.push({ el: legacy, limit: 5 });
+    document.querySelectorAll('[data-blog-feed]').forEach(el => {
+      const limit = parseInt(el.getAttribute('data-limit'), 10) || 5;
+      containers.push({ el: el, limit: limit });
+    });
+    if (containers.length === 0) return;
 
     // 설정: 티스토리 블로그 ID (예: 'namilsystem')
-    // 네이버 블로그는 RSS 미지원으로 자동 연동 불가, 티스토리 사용 중
-    const tistoryId = 'namilsystem'; // ← 티스토리 블로그 ID로 변경하세요
+    const tistoryId = 'namilsystem';
     const rssUrl = 'https://' + tistoryId + '.tistory.com/rss';
     const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
 
+    const loadingHtml = '<p style="text-align:center;color:var(--color-text-muted);padding:24px 0">블로그 글을 불러오는 중입니다…</p>';
+    const emptyHtml = '<p style="text-align:center;color:var(--color-text-muted)">아직 등록된 블로그 글이 없습니다.</p>';
+    const errorHtml = '<p style="text-align:center;color:var(--color-text-muted)">블로그 피드를 불러오는 중 문제가 발생했습니다.</p>';
+
+    containers.forEach(c => { c.el.innerHTML = loadingHtml; });
+
+    function decodeHtml(text) {
+      const txt = document.createElement('textarea');
+      txt.innerHTML = text;
+      return txt.value;
+    }
+    function renderItems(items, limit) {
+      let html = '<div class="blog-feed__list">';
+      items.slice(0, limit).forEach(item => {
+        const date = new Date(item.pubDate).toLocaleDateString('ko-KR');
+        const title = decodeHtml(item.title);
+        html += '<a href="' + item.link + '" target="_blank" rel="noopener" class="blog-feed__item">' +
+          '<span class="blog-feed__title">' + title + '</span>' +
+          '<span class="blog-feed__date">' + date + '</span></a>';
+      });
+      html += '</div>';
+      return html;
+    }
+
     fetch(apiUrl)
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
+      .then(r => r.json())
+      .then(data => {
         if (data.status !== 'ok' || !data.items || data.items.length === 0) {
-          container.innerHTML = '<p style="text-align:center;color:var(--color-text-muted)">아직 등록된 블로그 글이 없습니다.</p>';
+          containers.forEach(c => { c.el.innerHTML = emptyHtml; });
           return;
         }
-        function decodeHtml(text) {
-          var txt = document.createElement('textarea');
-          txt.innerHTML = text;
-          return txt.value;
-        }
-        var html = '<div class="blog-feed__list">';
-        data.items.slice(0, 5).forEach(function(item) {
-          var date = new Date(item.pubDate).toLocaleDateString('ko-KR');
-          var title = decodeHtml(item.title);
-          html += '<a href="' + item.link + '" target="_blank" rel="noopener" class="blog-feed__item">' +
-            '<span class="blog-feed__title">' + title + '</span>' +
-            '<span class="blog-feed__date">' + date + '</span></a>';
-        });
-        html += '</div>';
-        container.innerHTML = html;
+        containers.forEach(c => { c.el.innerHTML = renderItems(data.items, c.limit); });
       })
-      .catch(function() {
-        container.innerHTML = '<p style="text-align:center;color:var(--color-text-muted)">블로그 피드를 불러오는 중 문제가 발생했습니다.</p>';
+      .catch(() => {
+        containers.forEach(c => { c.el.innerHTML = errorHtml; });
       });
   }
 
