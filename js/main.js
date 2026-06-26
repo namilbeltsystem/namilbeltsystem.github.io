@@ -57,9 +57,14 @@
       const href = link.getAttribute('href');
       if (href && path.endsWith(href)) link.classList.add('nav__link--active');
     });
+    // 네비게이션에 없는 서브 페이지(예: 사업자정보·개인정보처리방침)에서는
+    // "홈"이 잘못 활성화되지 않도록, 실제 홈(/ 또는 index.html)일 때만 처리.
     if (!document.querySelector('.nav__link--active')) {
-      const home = document.querySelector('.nav__link[href="index.html"]');
-      if (home) home.classList.add('nav__link--active');
+      const isHome = path === '/' || /(^|\/)index\.html$/.test(path);
+      if (isHome) {
+        const home = document.querySelector('.nav__link[href="index.html"]');
+        if (home) home.classList.add('nav__link--active');
+      }
     }
   }
 
