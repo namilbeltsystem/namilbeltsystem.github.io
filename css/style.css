@@ -320,18 +320,50 @@ body.nav-open {
   visibility: visible;
   z-index: 1;
 }
+/* 사진 없는 디자인 배경: 그라데이션 + 대각선 패턴 + 컨베이어 모티프 */
 .hero-slide__bg {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.38);
-  transform: scale(1.06);
-  transition: transform 7s linear;
+  overflow: hidden;
 }
-.hero-slide.is-active .hero-slide__bg {
-  transform: scale(1);
+.hero-slide__bg::before {
+  content: '';
+  position: absolute;
+  inset: -25%;
+  background-image: repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 44px);
+  pointer-events: none;
+}
+.hero-slide__bg::after {
+  content: '';
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  bottom: 16%;
+  height: 3px;
+  background-image: repeating-linear-gradient(90deg, rgba(53,212,121,0.55) 0 30px, transparent 30px 66px);
+  animation: conveyorFlow 2.6s linear infinite;
+}
+@keyframes conveyorFlow {
+  from { transform: translateX(0); }
+  to { transform: translateX(66px); }
+}
+.hero-slide__bg--1 {
+  background:
+    radial-gradient(1100px 560px at 78% 18%, rgba(3,199,90,0.26), transparent 62%),
+    radial-gradient(820px 520px at 12% 88%, rgba(53,212,121,0.14), transparent 60%),
+    linear-gradient(135deg, #10171b 0%, #1b242a 52%, #0d1417 100%);
+}
+.hero-slide__bg--2 {
+  background:
+    radial-gradient(1000px 620px at 20% 18%, rgba(53,212,121,0.22), transparent 60%),
+    radial-gradient(700px 480px at 85% 85%, rgba(255,255,255,0.06), transparent 55%),
+    linear-gradient(130deg, #022616 0%, #03451f 55%, #012211 100%);
+}
+.hero-slide__bg--3 {
+  background:
+    radial-gradient(900px 520px at 50% 112%, rgba(3,199,90,0.2), transparent 62%),
+    radial-gradient(600px 400px at 85% 15%, rgba(53,212,121,0.12), transparent 60%),
+    linear-gradient(160deg, #111a20 0%, #0e161b 50%, #16222a 100%);
 }
 .hero-slide__content {
   position: relative;
@@ -564,9 +596,8 @@ body.nav-open {
     transform: none;
     transition: none;
   }
-  .hero-slide__bg {
-    transition: none;
-    transform: none;
+  .hero-slide__bg::after {
+    animation: none;
   }
 }
 
