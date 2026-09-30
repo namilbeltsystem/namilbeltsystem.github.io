@@ -27,28 +27,41 @@
       <h2 class="section__title section__title--center">온라인 문의</h2>
       <p class="section__subtitle text-center">아래 양식을 작성해 주시면 빠른 시일 내에 답변 드리겠습니다.</p>
 
-      <form class="inquiry-form" action="https://formspree.io/f/mojbdqzy" method="POST">
+      <form class="inquiry-form" action="https://formspree.io/f/mojbdqzy" method="POST" novalidate>
+        <!-- 봇 방지용 숨김 필드 (사용자에게 보이지 않음) -->
+        <div class="inquiry-form__hp" aria-hidden="true">
+          <label for="inquiry-gotcha">이 필드를 비워 두세요</label>
+          <input type="text" id="inquiry-gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+        </div>
+        <input type="hidden" name="_subject" value="[남일벨트시스템] 홈페이지 문의">
+
+        <!-- 검증/전송 오류 요약 -->
+        <div class="inquiry-form__error-summary" role="alert" aria-live="assertive">
+          <strong>입력 내용을 확인해 주세요</strong>
+          <ul></ul>
+        </div>
+
         <div class="inquiry-form__row">
           <div class="inquiry-form__group">
             <label class="inquiry-form__label" for="inquiry-name">이름<span class="required">*</span></label>
-            <input class="inquiry-form__input" type="text" id="inquiry-name" name="name" data-validate required placeholder="홍길동">
+            <input class="inquiry-form__input" type="text" id="inquiry-name" name="name" data-validate required autocomplete="name" placeholder="홍길동">
             <span class="inquiry-form__error"></span>
           </div>
           <div class="inquiry-form__group">
             <label class="inquiry-form__label" for="inquiry-company">회사명</label>
-            <input class="inquiry-form__input" type="text" id="inquiry-company" name="company" placeholder="(주)가나다">
+            <input class="inquiry-form__input" type="text" id="inquiry-company" name="company" autocomplete="organization" placeholder="(주)가나다">
           </div>
         </div>
 
         <div class="inquiry-form__row">
           <div class="inquiry-form__group">
             <label class="inquiry-form__label" for="inquiry-phone">연락처<span class="required">*</span></label>
-            <input class="inquiry-form__input" type="tel" id="inquiry-phone" name="phone" data-validate required placeholder="010-1234-5678">
+            <input class="inquiry-form__input" type="tel" id="inquiry-phone" name="phone" data-validate required autocomplete="tel" inputmode="tel" placeholder="010-1234-5678">
             <span class="inquiry-form__error"></span>
           </div>
           <div class="inquiry-form__group">
             <label class="inquiry-form__label" for="inquiry-email">이메일<span class="required">*</span></label>
-            <input class="inquiry-form__input" type="email" id="inquiry-email" name="email" data-validate required placeholder="example@company.com">
+            <input class="inquiry-form__input" type="email" id="inquiry-email" name="email" data-validate required autocomplete="email" inputmode="email" placeholder="example@company.com">
             <span class="inquiry-form__error"></span>
           </div>
         </div>
@@ -83,10 +96,23 @@
 
         <button type="submit" class="inquiry-form__submit">문의하기</button>
 
-        <div class="inquiry-form__success">
+        <div class="inquiry-form__success" role="status">
           <div class="inquiry-form__success-icon">&#9989;</div>
           <h3>문의가 접수되었습니다</h3>
           <p>빠른 시일 내에 답변 드리겠습니다.<br>긴급한 문의는 <strong>02-6084-7795</strong>로 전화 주세요.</p>
+        </div>
+
+        <!-- 전송 실패 시 안내 (네트워크/서버 오류) -->
+        <div class="inquiry-form__fail" role="alert">
+          <div class="inquiry-form__fail-icon">&#9888;&#65039;</div>
+          <h3>문의 전송에 실패했습니다</h3>
+          <p>네트워크 또는 서버 문제로 문의가 전송되지 않았습니다.<br>
+          아래 연락처로 직접 문의해 주시거나, 잠시 후 다시 시도해 주세요.</p>
+          <div class="btn-group">
+            <a href="tel:02-6084-7795" class="btn btn--primary">&#128222; 02-6084-7795</a>
+            <a href="mailto:namilsystem@naver.com" class="btn btn--outline">&#9993; 이메일 보내기</a>
+            <button type="button" class="btn btn--accent inquiry-form__retry">&#128260; 다시 시도</button>
+          </div>
         </div>
       </form>
     </div>

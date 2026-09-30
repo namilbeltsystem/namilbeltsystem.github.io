@@ -10,7 +10,7 @@
 python build.py
 ```
 
-- GitHub Pages로 자동 배포(`.github/workflows/pages.yml`)
+- GitHub Pages로 자동 배포(`.github/workflows/pages.yml`) — CI가 `build.py`를 다시 실행하여 항상 최신 페이지를 배포하며, `build.py`·`content/`·`pdfgen/` 등 소스 파일은 배포되지 않습니다
 - 티스토리 블로그 최신 글은 `news.html`에서 rss2json API로 실시간 연동(`js/main.js`의 `setupBlogFeed`)
 
 ## 사이트 구조
@@ -35,5 +35,7 @@ python build.py
 ## 주요 기술 스택
 
 - 순수 HTML/CSS/JS (빌드 도구: Python `build.py`)
-- Nanum Gothic 웹폰트, 네이버 컬러(#03C75A) 테마
-- 반응형(모바일 햄버거 메뉴), SEO 메타/OG/JSON-LD, 구글 애널리틱스
+- Nanum Gothic 웹폰트(WOFF2 한글 서브셋, 6.2MB → 1.1MB), WebP 이미지, 네이버 컬러(#03C75A) 테마
+- 메인 히어로 슬라이더(자동 재생·스와이프·키보드 접근성), 스크롤 리빌·통계 카운터 애니메이션
+- 반응형(모바일 햄버거 메뉴·접이식 빠른 연락 버튼), WCAG AA 색상 대비, 스킵 링크·aria 접근성
+- SEO 메타/OG/JSON-LD, 구글 애널리틱스

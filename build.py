@@ -2,6 +2,7 @@
 """남일벨트시스템 웹사이트 빌더 - 공통 템플릿으로 HTML 페이지 생성"""
 
 import json, os, sys
+from datetime import datetime
 
 SITE_URL = "https://xn--q20bp1ulxengk5sqrqshc.kr"
 GA_ID = "G-RKW5E36SZV"
@@ -18,9 +19,14 @@ HEAD_COMMON = (
     '{{DESC_META}}\n'
     '<title>{{TITLE}}</title>\n'
     '<link rel="canonical" href="{{CANONICAL}}">\n'
+    '<meta name="theme-color" content="#027D3F">\n'
     '<link rel="icon" type="image/x-icon" href="favicon.ico">\n'
     '<link rel="apple-touch-icon" href="images/logo.png">\n'
+    '<script>document.documentElement.classList.add("js");</script>\n'
     '<link rel="stylesheet" href="css/style.css">\n'
+    '<link rel="preload" href="fonts/nanum-gothic-400.woff2" as="font" type="font/woff2" crossorigin>\n'
+    '<link rel="preload" href="fonts/nanum-gothic-700.woff2" as="font" type="font/woff2" crossorigin>\n'
+    '<noscript><style>.faq-item__answer{max-height:none}</style></noscript>\n'
     f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA_ID}"></script>\n'
     '<script>\n'
     '  window.dataLayer = window.dataLayer || [];\n'
@@ -74,25 +80,24 @@ FOOTER = (
     '      </div>\n'
     '    </div>\n'
     '    <div class="footer__bottom">\n'
-    '      <p>&copy; 2026 남일벨트시스템. All Rights Reserved.</p>\n'
+    f'      <p>&copy; {datetime.now().year} 남일벨트시스템. All Rights Reserved.</p>\n'
     '    </div>\n'
     '  </div>\n'
     '</footer>'
 )
 
+SKIP_LINK = '<a class="skip-link" href="#main-content">본문 바로가기</a>'
+
+# 모바일에서는 접이식 단일 버튼(빠른 연락), 데스크톱에서는 전체 버튼 표시
 FLOATING = (
     '<div class="floating">\n'
-    '  <a href="tel:02-6084-7795" class="floating__btn" title="전화" aria-label="전화">&#128222;</a>\n'
-    '  <a href="mailto:namilsystem@naver.com" class="floating__btn" title="이메일" aria-label="이메일">&#9993;</a>\n'
-    '  <a href="https://namilsystem.tistory.com/" target="_blank" rel="noopener" class="floating__btn" title="블로그" aria-label="블로그">&#127760;</a>\n'
-    '  <button type="button" class="floating__btn floating__btn--top" title="맨 위로" aria-label="맨 위로">&#9650;</button>\n'
-    '</div>'
-)
-
-LIGHTBOX = (
-    '<div class="lightbox" id="lightbox">\n'
-    '  <button type="button" class="lightbox__close" aria-label="닫기">&times;</button>\n'
-    '  <img class="lightbox__image" src="" alt="">\n'
+    '  <button type="button" class="floating__toggle" aria-expanded="false" aria-label="빠른 연락 메뉴 열기">&#9742;</button>\n'
+    '  <div class="floating__menu">\n'
+    '    <a href="tel:02-6084-7795" class="floating__btn" title="전화" aria-label="전화 문의">&#128222;</a>\n'
+    '    <a href="mailto:namilsystem@naver.com" class="floating__btn" title="이메일" aria-label="이메일 문의">&#9993;</a>\n'
+    '    <a href="https://namilsystem.tistory.com/" target="_blank" rel="noopener" class="floating__btn" title="블로그" aria-label="블로그 방문">&#127760;</a>\n'
+    '    <button type="button" class="floating__btn floating__btn--top" title="맨 위로" aria-label="맨 위로">&#9650;</button>\n'
+    '  </div>\n'
     '</div>'
 )
 
@@ -321,6 +326,11 @@ def build():
         header_html = HEADER
         for marker, cls in nav_map.items():
             header_html = header_html.replace(marker, cls)
+        # 현재 페이지 메뉴에 aria-current 부여 (스크린리너용)
+        header_html = header_html.replace(
+            'class="nav__link nav__link--active"',
+            'class="nav__link nav__link--active" aria-current="page"'
+        )
 
         # Head section
         head_html = HEAD_COMMON
@@ -331,7 +341,7 @@ def build():
         head_html = head_html.replace("{{EXTRA_HEAD}}", meta.get("extra_head", ""))
 
         # Assemble
-        output = f'<!DOCTYPE html>\n<html lang="ko">\n<head>\n  {head_html}\n</head>\n<body>\n\n{header_html}\n\n<main>\n{body}\n</main>\n\n{FOOTER}\n\n{FLOATING}\n\n{LIGHTBOX}\n\n{SCRIPT}\n</body>\n</html>\n'
+        output = f'<!DOCTYPE html>\n<html lang="ko">\n<head>\n  {head_html}\n</head>\n<body>\n\n{SKIP_LINK}\n\n{header_html}\n\n<main id="main-content">\n{body}\n</main>\n\n{FOOTER}\n\n{FLOATING}\n\n{SCRIPT}\n</body>\n</html>\n'
 
         file_path = meta["file"]
         with open(file_path, "w", encoding="utf-8") as f:

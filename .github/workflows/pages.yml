@@ -21,13 +21,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # content/*.html + build.py로 항상 최신 페이지를 생성 (로컬 빌드 누락 방지)
+      - name: Build pages
+        run: python build.py
+
+      # 배포 대상 파일만 _site에 모음 (build.py, content/, pdfgen/ 등 소스 제외)
+      - name: Assemble site files
+        run: |
+          mkdir -p _site
+          cp *.html *.pdf *.ico *.txt *.xml CNAME _site/
+          cp -r css js fonts images docs _site/
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment

@@ -18,9 +18,14 @@
 <meta name="description" content="경량·고하중·식품·타이밍·모놀리식 컨베이어 벨트 전문. 무료 상담, 맞춤 설계, 현장 설치, 유지보수까지. 지금 문의하세요.">
 <title>컨베이어 벨트 전문기업 남일벨트시스템 | 산업용 벨트 솔루션</title>
 <link rel="canonical" href="https://xn--q20bp1ulxengk5sqrqshc.kr/">
+<meta name="theme-color" content="#027D3F">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="images/logo.png">
+<script>document.documentElement.classList.add("js");</script>
 <link rel="stylesheet" href="css/style.css">
+<link rel="preload" href="fonts/nanum-gothic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/nanum-gothic-700.woff2" as="font" type="font/woff2" crossorigin>
+<noscript><style>.faq-item__answer{max-height:none}</style></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RKW5E36SZV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -47,6 +52,8 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">본문 바로가기</a>
+
 <header class="page-header">
   <div class="container">
     <a href="index.html" class="logo">
@@ -60,7 +67,7 @@
     </button>
     <nav class="nav" id="nav" aria-label="주요 메뉴">
       <ul class="nav__list">
-        <li><a href="index.html" class="nav__link nav__link--active">홈</a></li>
+        <li><a href="index.html" class="nav__link nav__link--active" aria-current="page">홈</a></li>
         <li><a href="about.html" class="nav__link">회사소개</a></li>
         <li><a href="belt-types.html" class="nav__link">벨트 종류</a></li>
         <li><a href="habasit-catalog.html" class="nav__link">카탈로그</a></li>
@@ -73,53 +80,244 @@
   </div>
 </header>
 
-<main>
-<section class="hero">
-    <div class="hero__bg" style="background-image:url(images/hero-bg.png)"></div>
-    <div class="hero__content">
-      <img src="images/logo.svg" alt="남일벨트시스템" class="hero__logo">
-      <h1 class="hero__title">컨베이어 벨트 전문기업 남일벨트시스템</h1>
-      <p class="hero__desc">산업용 벨트, 컨베이어 벨트, 컨베이어 시스템<br>"남일벨트시스템"이 함께 합니다.</p>
-      <a href="contact.html" class="hero__cta">상담문의</a>
+<main id="main-content">
+<!-- ===== 히어로 슬라이더 ===== -->
+  <section class="hero-slider" aria-roledescription="carousel" aria-label="남일벨트시스템 주요 소개">
+    <div class="hero-slide is-active" role="group" aria-roledescription="slide" aria-label="1 / 3" aria-hidden="false">
+      <img class="hero-slide__bg" src="images/hero-bg.webp" alt="" width="1000" height="733" fetchpriority="high">
+      <div class="hero-slide__content">
+        <span class="hero-slide__eyebrow">산업용 컨베이어 벨트 전문 기업</span>
+        <h1 class="hero-slide__title">컨베이어 벨트 전문기업<br>남일벨트시스템</h1>
+        <p class="hero-slide__desc">산업용 벨트, 컨베이어 벨트, 컨베이어 시스템<br>"남일벨트시스템"이 함께 합니다.</p>
+        <div class="hero-slide__cta">
+          <a href="contact.html" class="btn btn--primary">&#128172; 상담문의</a>
+          <a href="belt-types.html" class="btn btn--outline">&#9881; 벨트 종류 보기</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 / 3" aria-hidden="true">
+      <img class="hero-slide__bg" src="images/about-1.webp" alt="" width="989" height="709" loading="lazy">
+      <div class="hero-slide__content">
+        <span class="hero-slide__eyebrow">Habasit 공식 파트너</span>
+        <h2 class="hero-slide__title">세계 1위 기술력을<br>국내 현장 가장 가까이</h2>
+        <p class="hero-slide__desc">모놀리식 벨트 세계 1위, 식품 벨트 글로벌 Top 2 하바지트(Habasit)의<br>전 제품군을 안정적으로 공급합니다.</p>
+        <div class="hero-slide__cta">
+          <a href="habasit-catalog.html" class="btn btn--primary">&#128218; 전체 카탈로그</a>
+          <a href="about.html" class="btn btn--outline">&#127970; 회사소개</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 / 3" aria-hidden="true">
+      <img class="hero-slide__bg" src="images/contact-hero.webp" alt="" width="1000" height="534" loading="lazy">
+      <div class="hero-slide__content">
+        <span class="hero-slide__eyebrow">상담부터 A/S까지 원스톱</span>
+        <h2 class="hero-slide__title">무료 상담 · 맞춤 견적<br>현장 설치 · 긴급 출장</h2>
+        <p class="hero-slide__desc">전문 엔지니어가 벨트 선정부터 설치·시운전, 정기 유지보수까지<br>한 번의 문의로 책임집니다.</p>
+        <div class="hero-slide__cta">
+          <a href="contact.html" class="btn btn--primary">&#128222; 무료 상담 신청</a>
+          <a href="faq.html" class="btn btn--outline">&#10067; 자주 묻는 질문</a>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="hero-slider__arrow hero-slider__arrow--prev" aria-label="이전 슬라이드">&#8249;</button>
+    <button type="button" class="hero-slider__arrow hero-slider__arrow--next" aria-label="다음 슬라이드">&#8250;</button>
+    <div class="hero-slider__controls">
+      <div class="hero-slider__dots" role="tablist" aria-label="슬라이드 선택"></div>
+      <button type="button" class="hero-slider__pause" aria-label="자동 재생 일시정지">&#10074;&#10074;</button>
+    </div>
+    <div class="hero-slider__progress"><span class="hero-slider__progress-bar"></span></div>
+  </section>
+
+  <!-- ===== 신뢰 지표 ===== -->
+  <section class="stats" aria-label="주요 지표">
+    <div class="container">
+      <div class="stats__grid">
+        <div class="stat-card">
+          <span class="stat-card__number" data-count="6" data-suffix="종">0종</span>
+          <span class="stat-card__label">핵심 컨베이어 벨트 제품군</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__number" data-count="44" data-suffix="+">0+</span>
+          <span class="stat-card__label">기술 자료 PDF (한글판·영문판)</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__number" data-count="5" data-suffix="단계">0단계</span>
+          <span class="stat-card__label">상담부터 A/S까지 원스톱 프로세스</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__number" data-count="70" data-suffix="+">0+</span>
+          <span class="stat-card__label">하바지트 글로벌 서비스 네트워크 (개국)</span>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- ===== 제품군 빠른 탐색 ===== -->
   <section class="section">
     <div class="container">
-      <h2 class="section__title section__title--center">전체 메뉴</h2>
-      <p class="section__subtitle text-center">원하시는 정보를 선택해 주세요</p>
+      <h2 class="section__title section__title--center" data-reveal>제품군 빠른 탐색</h2>
+      <p class="section__subtitle text-center" data-reveal>사용 환경에 맞는 컨베이어 벨트를 선택하세요</p>
+      <div class="product-grid">
+        <a href="belt-types.html#lightweight" class="product-card" data-reveal>
+          <img class="product-card__img" src="images/belt-lightweight.webp" alt="경량 컨베이어 벨트" width="769" height="750" loading="lazy">
+          <div class="product-card__body">
+            <h3 class="product-card__title">경량 컨베이어 벨트</h3>
+            <p class="product-card__desc">PVC·PU·PE 소재의 직물 기반 벨트. 분류·계량·검사·포장 라인에 최적화.</p>
+            <span class="product-card__more">자세히 보기</span>
+          </div>
+        </a>
+        <a href="belt-types.html#heavy" class="product-card" data-reveal>
+          <img class="product-card__img" src="images/belt-heavy.webp" alt="고하중 컨베이어 벨트" width="768" height="750" loading="lazy">
+          <div class="product-card__body">
+            <h3 class="product-card__title">고하중 컨베이어 벨트</h3>
+            <p class="product-card__desc">내마모성·내충격성 탁월. 광산·철강·건설·재활용 등 험한 공정 환경 대응.</p>
+            <span class="product-card__more">자세히 보기</span>
+          </div>
+        </a>
+        <a href="belt-types.html#food" class="product-card" data-reveal>
+          <img class="product-card__img" src="images/belt-food.webp" alt="식품 벨트" width="766" height="750" loading="lazy">
+          <div class="product-card__body">
+            <h3 class="product-card__title">식품 벨트</h3>
+            <p class="product-card__desc">FDA·EU 식품 접촉 규정 준수 TPU 벨트. HACCP 대응 위생 설계.</p>
+            <span class="product-card__more">자세히 보기</span>
+          </div>
+        </a>
+        <a href="belt-types.html#processing" class="product-card" data-reveal>
+          <img class="product-card__img" src="images/belt-processing.webp" alt="프로세싱 벨트" width="768" height="750" loading="lazy">
+          <div class="product-card__body">
+            <h3 class="product-card__title">프로세싱 벨트</h3>
+            <p class="product-card__desc">내절단성·내유성 복합 물성. 목재·금속·제지·섬유 등 까다로운 제조 공정용.</p>
+            <span class="product-card__more">자세히 보기</span>
+          </div>
+        </a>
+        <a href="belt-types.html#timing" class="product-card" data-reveal>
+          <img class="product-card__img" src="images/belt-timing.webp" alt="타이밍 벨트" width="769" height="750" loading="lazy">
+          <div class="product-card__body">
+            <h3 class="product-card__title">타이밍 벨트 (HabaSYNC)</h3>
+            <p class="product-card__desc">고정밀 동기 이송. 자동화·EV 배터리·정밀기계 공정에 필수적.</p>
+            <span class="product-card__more">자세히 보기</span>
+          </div>
+        </a>
+        <a href="belt-types.html#monolithic" class="product-card" data-reveal>
+          <img class="product-card__img" src="images/belt-monolithic.webp" alt="모놀리식 벨트" width="760" height="750" loading="lazy">
+          <div class="product-card__body">
+            <h3 class="product-card__title">모놀리식 벨트 (Cleandrive)</h3>
+            <p class="product-card__desc">이음매 없는 일체형 구조로 위생 극대화. 세척 시간·물 사용량 최대 50% 절감.</p>
+            <span class="product-card__more">자세히 보기</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 왜 남일벨트시스템인가 ===== -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title section__title--center" data-reveal>왜 남일벨트시스템인가</h2>
+      <p class="section__subtitle text-center" data-reveal>벨트 하나를 넘어 생산 라인 전체를 책임집니다</p>
+      <div class="feature-grid">
+        <div class="card card--icon" data-reveal>
+          <div class="card__icon">&#128300;</div>
+          <h3 style="font-size:var(--font-size-lg);font-weight:700;margin-bottom:8px">하바지트 정품 공급</h3>
+          <p style="color:var(--color-text-muted);line-height:1.8">세계 최고 수준의 품질을 검증된 공식 파트너 유통망으로 제공합니다.</p>
+        </div>
+        <div class="card card--icon" data-reveal>
+          <div class="card__icon">&#9881;</div>
+          <h3 style="font-size:var(--font-size-lg);font-weight:700;margin-bottom:8px">현장 맞춤 선정</h3>
+          <p style="color:var(--color-text-muted);line-height:1.8">이송 물체·온도·속도·환경까지 고려한 최적 사양을 전문 엔지니어가 제안합니다.</p>
+        </div>
+        <div class="card card--icon" data-reveal>
+          <div class="card__icon">&#128736;</div>
+          <h3 style="font-size:var(--font-size-lg);font-weight:700;margin-bottom:8px">전 과정 책임</h3>
+          <p style="color:var(--color-text-muted);line-height:1.8">상담·설계·설치·시운전·유지보수를 한 곳에서 일관되게 처리합니다.</p>
+        </div>
+        <div class="card card--icon" data-reveal>
+          <div class="card__icon">&#9889;</div>
+          <h3 style="font-size:var(--font-size-lg);font-weight:700;margin-bottom:8px">신속한 A/S</h3>
+          <p style="color:var(--color-text-muted);line-height:1.8">긴급 장애 시 신속 출장으로 다운타임을 최소화하고 예방 점검으로 리스크를 줄입니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 원스톱 프로세스 ===== -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title section__title--center" data-reveal>원스톱 서비스 프로세스</h2>
+      <p class="section__subtitle text-center" data-reveal>문의 한 번으로 상담부터 유지보수까지</p>
+      <div class="service-grid">
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon">1&#65039;&#8419;</div>
+          <h3>맞춤 상담</h3>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon">2&#65039;&#8419;</div>
+          <h3>설계 · 견적</h3>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon">3&#65039;&#8419;</div>
+          <h3>공급 · 제작</h3>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon">4&#65039;&#8419;</div>
+          <h3>현장 설치</h3>
+        </div>
+        <div class="service-item" data-reveal>
+          <div class="service-item__icon">5&#65039;&#8419;</div>
+          <h3>유지보수 · A/S</h3>
+        </div>
+      </div>
+      <div class="cta-box" data-reveal>
+        <h3 style="margin-bottom:12px">지금 무료로 상담받아 보세요</h3>
+        <p style="opacity:0.9;margin-bottom:20px">사용 환경을 알려주시면, 가장 적합한 컨베이어 벨트 솔루션을 제안해 드립니다.</p>
+        <div class="btn-group">
+          <a href="contact.html" class="btn btn--primary">&#128172; 상담 문의하기</a>
+          <a href="tel:02-6084-7795" class="btn btn--outline">&#128222; 02-6084-7795</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 전체 메뉴 ===== -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title section__title--center" data-reveal>전체 메뉴</h2>
+      <p class="section__subtitle text-center" data-reveal>원하시는 정보를 선택해 주세요</p>
       <div class="menu-grid">
-        <a href="about.html" class="link-card">
+        <a href="about.html" class="link-card" data-reveal>
           <div class="link-card__icon">&#127970;</div>
           <div class="link-card__title">회사소개</div>
           <div class="link-card__desc">미션·핵심가치·서비스 프로세스</div>
         </a>
-        <a href="belt-types.html" class="link-card">
+        <a href="belt-types.html" class="link-card" data-reveal>
           <div class="link-card__icon">&#9881;</div>
           <div class="link-card__title">벨트 종류</div>
           <div class="link-card__desc">6종 벨트 + 맞춤 시스템 안내</div>
         </a>
-        <a href="habasit-catalog.html" class="link-card">
+        <a href="habasit-catalog.html" class="link-card" data-reveal>
           <div class="link-card__icon">&#128218;</div>
           <div class="link-card__title">전체 카탈로그</div>
           <div class="link-card__desc">하바지트 기술 자료(PDF)</div>
         </a>
-        <a href="industry-trends.html" class="link-card">
+        <a href="industry-trends.html" class="link-card" data-reveal>
           <div class="link-card__icon">&#128200;</div>
           <div class="link-card__title">산업 동향</div>
           <div class="link-card__desc">2025-2030 시장 분석</div>
         </a>
-        <a href="news.html" class="link-card">
+        <a href="news.html" class="link-card" data-reveal>
           <div class="link-card__icon">&#128240;</div>
           <div class="link-card__title">최신 정보</div>
           <div class="link-card__desc">블로그 기술 자료 연동</div>
         </a>
-        <a href="faq.html" class="link-card">
+        <a href="faq.html" class="link-card" data-reveal>
           <div class="link-card__icon">&#10067;</div>
           <div class="link-card__title">자주 묻는 질문</div>
           <div class="link-card__desc">선정·견적·설치·A/S 안내</div>
         </a>
-        <a href="company-info.html" class="link-card">
+        <a href="company-info.html" class="link-card" data-reveal>
           <div class="link-card__icon">&#128274;</div>
           <div class="link-card__title">사업자 정보</div>
           <div class="link-card__desc">개인정보 보호 안내</div>
@@ -153,15 +351,13 @@
 </footer>
 
 <div class="floating">
-  <a href="tel:02-6084-7795" class="floating__btn" title="전화" aria-label="전화">&#128222;</a>
-  <a href="mailto:namilsystem@naver.com" class="floating__btn" title="이메일" aria-label="이메일">&#9993;</a>
-  <a href="https://namilsystem.tistory.com/" target="_blank" rel="noopener" class="floating__btn" title="블로그" aria-label="블로그">&#127760;</a>
-  <button type="button" class="floating__btn floating__btn--top" title="맨 위로" aria-label="맨 위로">&#9650;</button>
-</div>
-
-<div class="lightbox" id="lightbox">
-  <button type="button" class="lightbox__close" aria-label="닫기">&times;</button>
-  <img class="lightbox__image" src="" alt="">
+  <button type="button" class="floating__toggle" aria-expanded="false" aria-label="빠른 연락 메뉴 열기">&#9742;</button>
+  <div class="floating__menu">
+    <a href="tel:02-6084-7795" class="floating__btn" title="전화" aria-label="전화 문의">&#128222;</a>
+    <a href="mailto:namilsystem@naver.com" class="floating__btn" title="이메일" aria-label="이메일 문의">&#9993;</a>
+    <a href="https://namilsystem.tistory.com/" target="_blank" rel="noopener" class="floating__btn" title="블로그" aria-label="블로그 방문">&#127760;</a>
+    <button type="button" class="floating__btn floating__btn--top" title="맨 위로" aria-label="맨 위로">&#9650;</button>
+  </div>
 </div>
 
 <script src="js/main.js"></script>
