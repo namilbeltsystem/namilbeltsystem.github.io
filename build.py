@@ -238,7 +238,7 @@ PAGES = {
             '    "addressCountry": "KR",\n'
             '    "addressRegion": "서울특별시",\n'
             '    "addressLocality": "동대문구",\n'
-            '    "streetAddress": "한천로2길 16, 212호(덕암빌딩)"\n'
+            '    "streetAddress": "한천로2길 16, 212호 (덕암빌딩)"\n'
             '  },\n'
             '  "founder": {\n'
             '    "@type": "Person",\n'

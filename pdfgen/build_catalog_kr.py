@@ -257,6 +257,14 @@ def _plain(s):
     return re.sub(r"<[^>]+>", " ", s).replace("  ", " ").strip()
 
 
+def _josa(word, vowel_form, consonant_form):
+    """마지막 글자의 받침 유무에 따라 조사(을/를 등)를 선택한다."""
+    last = (word or "").strip()[-1:]
+    code = ord(last) - 0xAC00
+    has_batchim = not (0 <= code <= 0x11A7 and code % 28 == 0)
+    return consonant_form if has_batchim else vowel_form
+
+
 # ---------------------------------------------------------------------------
 # 콘텐츠 빌드 (데이터 구동)
 # ---------------------------------------------------------------------------
@@ -340,11 +348,12 @@ def build_flowables(cat):
         ["홈페이지", "%s (%s)" % (SITE, SITE_URL)],
     ]))
     F.append(Spacer(1, 8 * mm))
+    obj = product_name + _josa(product_name, "을", "를")
     F.append(_info_box(
         "무료 상담 안내",
         "사용 환경, 이송 물체의 종류와 중량, 컨베이어 규격, 작업 온도, 라인 속도 등을 "
-        "알려주시면 전문 엔지니어가 현장에 가장 적합한 %s를 선정해 드립니다. "
-        "전화(%s) 또는 이메일(%s)로 편하게 문의해 주세요." % (product_name, TEL, EMAIL)))
+        "알려주시면 전문 엔지니어가 현장에 가장 적합한 %s 선정해 드립니다. "
+        "전화(%s) 또는 이메일(%s)로 편하게 문의해 주세요." % (obj, TEL, EMAIL)))
     F.append(Spacer(1, 6 * mm))
     F.append(Paragraph(cat.get("disclaimer", DEFAULT_DISCLAIMER), STY["small"]))
     return F

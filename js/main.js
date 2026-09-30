@@ -607,9 +607,24 @@
         .replace(/'/g, '&#39;');
     }
     function decodeHtml(text) {
-      const txt = document.createElement('textarea');
-      txt.innerHTML = text;
-      return txt.value;
+      // RSS 제목에 이중 인코딩된 엔티티(예: &amp;mdash;)가 포함될 수 있으므로
+      // 값이 안정될 때까지 반복 디코딩하여 &mdash; 같은 문자열 노출을 방지
+      let result = String(text);
+      for (let i = 0; i < 5; i++) {
+        const txt = document.createElement('textarea');
+        txt.innerHTML = result;
+        if (txt.value === result) break;
+        result = txt.value;
+      }
+      return result;
+    }
+    function normalizeTitle(text) {
+      // 제목 후처리: 엔티티 완전 디코딩 → HTML 태그 제거 → 공백·대시 정규화
+      let title = decodeHtml(text);
+      title = title.replace(/<[^>]*>/g, '');          // 태그 조각 제거
+      title = title.replace(/\s+/g, ' ').trim();      // 연속 공백·줄바꿈 정리
+      title = title.replace(/\s*([\u2013\u2014\u2015])\s*/g, ' $1 '); // 대시 주변 공백 균일화
+      return title;
     }
     function safeUrl(url) {
       try {
@@ -623,7 +638,7 @@
       let html = '<div class="blog-feed__list">';
       items.slice(0, limit).forEach(item => {
         const date = new Date(item.pubDate).toLocaleDateString('ko-KR');
-        const title = escapeHtml(decodeHtml(item.title));
+        const title = escapeHtml(normalizeTitle(item.title));
         html += '<a href="' + safeUrl(item.link) + '" target="_blank" rel="noopener" class="blog-feed__item">' +
           '<span class="blog-feed__title">' + title + '</span>' +
           '<span class="blog-feed__date">' + escapeHtml(date) + '</span></a>';
