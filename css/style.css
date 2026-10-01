@@ -320,7 +320,7 @@ body.nav-open {
   visibility: visible;
   z-index: 1;
 }
-/* 사진 없는 디자인 배경: 그라데이션 + 대각선 패턴 + 컨베이어 모티프 */
+/* 현장 이미지를 활용한 슬라이드별 배경 */
 .hero-slide__bg {
   position: absolute;
   inset: 0;
@@ -348,22 +348,25 @@ body.nav-open {
   to { transform: translateX(66px); }
 }
 .hero-slide__bg--1 {
-  background:
-    radial-gradient(1100px 560px at 78% 18%, rgba(3,199,90,0.26), transparent 62%),
-    radial-gradient(820px 520px at 12% 88%, rgba(53,212,121,0.14), transparent 60%),
-    linear-gradient(135deg, #10171b 0%, #1b242a 52%, #0d1417 100%);
+  background-image:
+    linear-gradient(135deg, rgba(16,23,27,0.78), rgba(13,20,23,0.66)),
+    url('../images/belt-lightweight.webp');
+  background-position: center;
+  background-size: cover;
 }
 .hero-slide__bg--2 {
-  background:
-    radial-gradient(1000px 620px at 20% 18%, rgba(53,212,121,0.22), transparent 60%),
-    radial-gradient(700px 480px at 85% 85%, rgba(255,255,255,0.06), transparent 55%),
-    linear-gradient(130deg, #022616 0%, #03451f 55%, #012211 100%);
+  background-image:
+    linear-gradient(130deg, rgba(2,38,22,0.78), rgba(1,34,17,0.66)),
+    url('../images/belt-food.webp');
+  background-position: center;
+  background-size: cover;
 }
 .hero-slide__bg--3 {
-  background:
-    radial-gradient(900px 520px at 50% 112%, rgba(3,199,90,0.2), transparent 62%),
-    radial-gradient(600px 400px at 85% 15%, rgba(53,212,121,0.12), transparent 60%),
-    linear-gradient(160deg, #111a20 0%, #0e161b 50%, #16222a 100%);
+  background-image:
+    linear-gradient(160deg, rgba(17,26,32,0.78), rgba(14,22,27,0.68)),
+    url('../images/belt-heavy.webp');
+  background-position: center;
+  background-size: cover;
 }
 .hero-slide__content {
   position: relative;
@@ -500,33 +503,6 @@ body.nav-open {
 @keyframes heroProgress {
   from { width: 0; }
   to { width: 100%; }
-}
-
-/* ===== Stats (신뢰 지표) ===== */
-.stats {
-  background: var(--color-bg-dark);
-  color: var(--color-white);
-  padding: 56px 0;
-}
-.stats__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-  text-align: center;
-}
-.stat-card__number {
-  display: block;
-  font-size: 2.75rem;
-  font-weight: 800;
-  color: var(--color-primary-light);
-  line-height: 1.2;
-}
-.stat-card__label {
-  display: block;
-  margin-top: 8px;
-  font-size: var(--font-size-sm);
-  color: rgba(255,255,255,0.8);
-  word-break: keep-all;
 }
 
 /* ===== Product Cards (제품군 카드) ===== */
@@ -1472,9 +1448,6 @@ body.nav-open {
 
   .hero-slider__controls { bottom: 20px; }
   .hero-slider__pause { display: none; }
-
-  .stat-card__number { font-size: 2.1rem; }
-  .stats { padding: 40px 0; }
 
   .product-grid {
     grid-template-columns: 1fr;
