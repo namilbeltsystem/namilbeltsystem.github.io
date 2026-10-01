@@ -188,8 +188,11 @@
     // 일시정지/재생 버튼
     if (pauseBtn) {
       const syncPauseBtn = () => {
-        pauseBtn.textContent = paused ? '▶' : '❚❚';
-        pauseBtn.setAttribute('aria-label', paused ? '자동 재생 시작' : '자동 재생 일시정지');
+        pauseBtn.textContent = paused || prefersReducedMotion ? '▶' : '❚❚';
+        pauseBtn.setAttribute('aria-label', prefersReducedMotion
+          ? '모션 감소 설정으로 자동 재생이 비활성화됨'
+          : (paused ? '자동 재생 시작' : '자동 재생 일시정지'));
+        pauseBtn.disabled = prefersReducedMotion;
       };
       pauseBtn.addEventListener('click', () => {
         paused = !paused;
